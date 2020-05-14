@@ -1,45 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h4 align="center">
+  A PokeDex with React, using Hooks.
+</h4>
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucmkz/qagil-web.svg">
 
-## Available Scripts
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/lucmkz/qagil-web.svg">
 
-In the project directory, you can run:
+  <img alt="Repository size" src="https://img.shields.io/github/languages/code-size/lucmkz/qagil-web.svg">
+  
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lucmkz/qagil-web.svg">
 
-### `yarn start`
+  <img alt="Repository issues" src="https://img.shields.io/github/issues/lucmkz/qagil-web.svg">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <img alt="GitHub" src="https://img.shields.io/github/license/lucmkz/qagil-web.svg">
+</p>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<p align="center">
+  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
+</p>
 
-### `yarn test`
+![App Screenshot](src/playlistDemo.gif)
+<p align="center">
+  <h5 align="center">
+    Available on GiHub Pages
+  </h5>
+</p>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="center">
+  <a align="center" href="http://lucaswebs.com/playlist/index.html" target="_blank">
+    <img alt="Github Pages" src="https://res.cloudinary.com/dwudlwkie/image/upload/v1580429605/sdsd_qltl17.png">
+  </a>
+</p>
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## :rocket: Technologies
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This project was developed just for study with the technologies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-  [ReactJS](https://reactjs.org/)
+-  [React Router v4](https://github.com/ReactTraining/react-router)
+-  [styled-components](https://www.styled-components.com/)
+-  [React-Icons](https://react-icons.netlify.com/)
+-  [Redux](https://redux.js.org/)
+-  [FireBase](https://firebase.google.com/?hl=pt-br)
+-  [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
 
-### `yarn eject`
+## :information_source: How To Use
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js v10.16][nodejs] or higher + [Yarn v1.13][yarn] or higher installed on your computer. From your command line:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Clone this repository
+$ git clone https://github.com/lucmkz/playlist-react-Js
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Go into the repository
+$ cd playlist-react-Js
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Install dependencies
+$ yarn install
 
-## Learn More
+# Run the app
+$ yarn start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## :memo: License
+This project is under the MIT license. See the [LICENSE]() for more information.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# qagil-web
+---
+
+Made by Lucas Santos :wave: [Get in touch!](https://www.linkedin.com/in/lucasmk/)
+
+[nodejs]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/
+[vc]: https://code.visualstudio.com/
+[vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+[vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
