@@ -1,5 +1,5 @@
 <h4 align="center">
-  A PokeDex with React, using Hooks.
+  Front-End of QAgil Web App
 </h4>
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucmkz/qagil-web.svg">
