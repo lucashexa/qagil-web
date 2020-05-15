@@ -1,5 +1,5 @@
 <h4 align="center">
-  A PokeDex with React, using Hooks.
+  Front-End of QAgil Web App
 </h4>
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lucmkz/qagil-web.svg">
@@ -21,7 +21,7 @@
   <a href="#memo-license">License</a>
 </p>
 
-![App Screenshot](src/playlistDemo.gif)
+![App Screenshot](src/assets/screenAppliction.png)
 <p align="center">
   <h5 align="center">
     Available on GiHub Pages
