@@ -14,8 +14,6 @@ import logoImg from '../../assets/logo.png';
 const SingUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  console.log(formRef);
-
   const handleSubmit = useCallback(async (data: object) => {
     try {
       formRef.current?.setErrors({});
