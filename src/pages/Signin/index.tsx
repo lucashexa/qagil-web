@@ -5,8 +5,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import AuthContext from '../../context/AuthContext';
-
+import { AuthContext } from '../../context/AuthContext';
 import getValidarionErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -14,33 +13,44 @@ import Button from '../../components/Button';
 
 import logoImg from '../../assets/logo.png';
 
+interface SingInFormData {
+  email: string;
+  password: string;
+}
+
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { name } = useContext(AuthContext);
+  const { singIn } = useContext(AuthContext);
 
-  console.log(name);
+  const handleSubmit = useCallback(
+    async (data: SingInFormData) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('Email obrigatório')
+            .email('Email Obrigatório'),
+          password: Yup.string().required('Senha obrigatória'),
+        });
 
-  const handleSubmit = useCallback(async (data: object) => {
-    try {
-      formRef.current?.setErrors({});
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('Email obrigatório')
-          .email('Email Obrigatório'),
-        password: Yup.string().required('Senha obrigatória'),
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-    } catch (err) {
-      console.log(err);
+        singIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        console.log(err);
 
-      const errors = getValidarionErrors(err);
-      formRef.current?.setErrors(errors);
-    }
-  }, []);
+        const errors = getValidarionErrors(err);
+        formRef.current?.setErrors(errors);
+      }
+    },
+    [singIn],
+  );
 
   return (
     <Container>
