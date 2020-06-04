@@ -1,4 +1,4 @@
-import React, { createContext, useCallback } from 'react';
+import React, { createContext, useCallback, useState } from 'react';
 import api from '../services/api';
 
 interface SingInCredentials {
@@ -7,8 +7,13 @@ interface SingInCredentials {
 }
 
 interface AuthContextData {
-  name: string;
+  user: object;
   singIn(credentials: SingInCredentials): Promise<void>;
+}
+
+interface AuthState {
+  token: string;
+  user: object;
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -16,17 +21,32 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const [data, setData] = useState<AuthState>(() => {
+    const token = localStorage.getItem('@QAgil:token');
+    const user = localStorage.getItem('@QAgil:user');
+
+    if (token && user) {
+      return { token, user: JSON.parse(user) };
+    }
+    return {} as AuthState;
+  });
+
   const singIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', {
       email,
       password,
     });
 
-    console.log(response.data);
+    const { token, user } = response.data;
+
+    localStorage.setItem('@QAgil:token', token);
+    localStorage.setItem('@QAgil:user', JSON.stringify(user));
+
+    setData({ token, user });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ name: `Lucas`, singIn }}>
+    <AuthContext.Provider value={{ user: data.user, singIn }}>
       {children}
     </AuthContext.Provider>
   );
