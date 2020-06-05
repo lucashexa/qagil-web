@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { prependOnceListener } from 'cluster';
 
 interface ToastProps {
   type?: 'success' | 'error' | 'info';
