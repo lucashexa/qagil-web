@@ -9,6 +9,7 @@ interface SingInCredentials {
 interface AuthContextData {
   user: object;
   singIn(credentials: SingInCredentials): Promise<void>;
+  singOut(): void;
 }
 
 interface AuthState {
@@ -43,8 +44,15 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
+  const singOut = useCallback(() => {
+    localStorage.removeItem('@QAgil:token');
+    localStorage.removeItem('@QAgil:user');
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, singIn }}>
+    <AuthContext.Provider value={{ user: data.user, singIn, singOut }}>
       {children}
     </AuthContext.Provider>
   );
