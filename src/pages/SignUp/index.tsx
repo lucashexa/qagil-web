@@ -5,7 +5,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 
-import api from '../../services/api';
+import { apiLocal, apiQuser } from '../../services/api';
 
 import { useToast } from '../../hooks/toast';
 
@@ -45,14 +45,31 @@ const SingUp: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        const config = {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+            'Content-Type': 'application/json',
+          },
+        };
+
+        const [firstName, lastName] = data.name.split(' ');
+        const dataQuser = {
+          email: data.email,
+          first_name: firstName,
+          last_name: lastName,
+        };
+        console.log(dataQuser);
+        await apiQuser.post('/v1/user/create', dataQuser, config);
+
+        // await apiLocal.post('/users', data);
 
         history.push('/');
 
         addToast({
           type: 'success',
           title: 'Cadastro realizado',
-          description: 'Vocë j[a pode fazer seu logon!',
+          description: 'Vocë já pode fazer seu logon!',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -82,7 +99,7 @@ const SingUp: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça Seu Cadastro</h1>
 
-            <Input name="name" icon={FiUser} type="text" placeholder="E-Mail" />
+            <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
             <Input
               name="email"
               icon={FiMail}

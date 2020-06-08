@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const api = axios.create({
+export const apiLocal = axios.create({
   baseURL: 'http://localhost:3333',
 });
 
-export default api;
+export const apiQuser = axios.create({
+  baseURL: 'http://18.230.153.28:8000/quser',
+});
