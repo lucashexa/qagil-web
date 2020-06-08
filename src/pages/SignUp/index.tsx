@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -62,7 +62,7 @@ const SingUp: React.FC = () => {
         console.log(dataQuser);
         await apiQuser.post('/v1/user/create', dataQuser, config);
 
-        // await apiLocal.post('/users', data);
+        await apiLocal.post('/users', data);
 
         history.push('/');
 

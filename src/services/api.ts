@@ -5,5 +5,6 @@ export const apiLocal = axios.create({
 });
 
 export const apiQuser = axios.create({
-  baseURL: 'http://18.230.153.28:8000/quser',
+  baseURL:
+    'https://cors-anywhere.herokuapp.com/http://18.230.153.28:8000/quser',
 });
