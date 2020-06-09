@@ -1,5 +1,10 @@
 import React from 'react';
+import CreateEvent from '../EndPoints/createEvent';
 
-const Dashboard: React.FC = () => <h1>DashBoard</h1>;
+const Dashboard: React.FC = () => (
+  <>
+    <CreateEvent />
+  </>
+);
 
 export default Dashboard;

@@ -60,8 +60,8 @@ const SingUp: React.FC = () => {
           last_name: lastName,
         };
         console.log(dataQuser);
-        await apiQuser.post('/v1/user/create', dataQuser, config);
 
+        await apiQuser.post('/v1/user/create', dataQuser, config);
         await apiLocal.post('/users', data);
 
         history.push('/');
