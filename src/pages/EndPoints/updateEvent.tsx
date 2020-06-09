@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -94,14 +94,14 @@ const UpdateEvent: React.FC = () => {
       <Content>
         <AnimationContainer>
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Criar Evento</h1>
+            <h1>updateEvent</h1>
 
             <Input name="name" type="text" placeholder="Nome" />
             <Input name="description" type="text" placeholder="Descrição" />
             <Input name="email" type="text" placeholder="E-Mail" />
             <Input name="image_url" type="text" placeholder="Url da imagem" />
 
-            <Button type="submit">Criar Evento</Button>
+            <Button type="submit">updateEvent</Button>
           </Form>
         </AnimationContainer>
       </Content>
