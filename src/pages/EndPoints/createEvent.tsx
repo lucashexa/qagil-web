@@ -63,9 +63,9 @@ const CreateEvent: React.FC = () => {
           },
         };
 
-        console.log(dataQEvent);
+        const response = await apiQevent.post('/', dataQEvent, config);
 
-        await apiQevent.post('/v1/company', dataQEvent, config);
+        console.log(response.data);
 
         addToast({
           type: 'success',
@@ -99,8 +99,8 @@ const CreateEvent: React.FC = () => {
             <Input name="name" type="text" placeholder="Nome" />
             <Input name="description" type="text" placeholder="Descrição" />
             <Input name="email" type="text" placeholder="E-Mail" />
-            <Input name="image" type="text" placeholder="Url da imagem" />
-            <Input name="adress" type="text" placeholder="Rua" />
+            <Input name="image_url" type="text" placeholder="Url da imagem" />
+            <Input name="address" type="text" placeholder="Rua" />
             <Input name="city" type="text" placeholder="Cidade" />
             <Input name="lat" type="text" placeholder="Latitude" />
             <Input name="lng" type="text" placeholder="Logitude" />

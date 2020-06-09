@@ -11,5 +11,5 @@ export const apiQuser = axios.create({
 
 export const apiQevent = axios.create({
   baseURL:
-    'https://cors-anywhere.herokuapp.com/http://18.230.153.28:8000/qevent',
+    'https://cors-anywhere.herokuapp.com/http://18.230.153.28:8000/qevent/v1/company',
 });
