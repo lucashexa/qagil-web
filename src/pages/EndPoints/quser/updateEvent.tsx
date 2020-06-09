@@ -4,18 +4,18 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
-import { apiQevent } from '../../services/api';
+import { apiQevent } from '../../../services/api';
 
-import { useToast } from '../../hooks/toast';
+import { useToast } from '../../../hooks/toast';
 
-import getValidarionErrors from '../../utils/getValidationErrors';
+import getValidarionErrors from '../../../utils/getValidationErrors';
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../../components/Input';
+import Button from '../../../components/Button';
 
-import { Container, Content, AnimationContainer } from '../SignUp/styles';
+import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 
-interface UpdateEventFormData {
+interface UpdateUserFormData {
   name: string;
   description: string;
   email: string;
@@ -27,13 +27,13 @@ interface UpdateEventFormData {
   lat: number;
   lng: number;
 }
-const UpdateEvent: React.FC = () => {
+const UpdateUser: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: UpdateEventFormData) => {
+    async (data: UpdateUserFormData) => {
       try {
         formRef.current?.setErrors({});
 
@@ -94,14 +94,14 @@ const UpdateEvent: React.FC = () => {
       <Content>
         <AnimationContainer>
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>updateEvent</h1>
+            <h1>UpdateUser</h1>
 
             <Input name="name" type="text" placeholder="Nome" />
             <Input name="description" type="text" placeholder="Descrição" />
             <Input name="email" type="text" placeholder="E-Mail" />
             <Input name="image_url" type="text" placeholder="Url da imagem" />
 
-            <Button type="submit">updateEvent</Button>
+            <Button type="submit">UpdateUser</Button>
           </Form>
         </AnimationContainer>
       </Content>
@@ -109,4 +109,4 @@ const UpdateEvent: React.FC = () => {
   );
 };
 
-export default UpdateEvent;
+export default UpdateUser;

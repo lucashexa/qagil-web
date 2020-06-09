@@ -4,16 +4,16 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
-import { apiQevent } from '../../services/api';
+import { apiQevent } from '../../../services/api';
 
-import { useToast } from '../../hooks/toast';
+import { useToast } from '../../../hooks/toast';
 
-import getValidarionErrors from '../../utils/getValidationErrors';
+import getValidarionErrors from '../../../utils/getValidationErrors';
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../../components/Input';
+import Button from '../../../components/Button';
 
-import { Container, Content, AnimationContainer } from '../SignUp/styles';
+import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 
 interface CreateEventFormData {
   name: string;

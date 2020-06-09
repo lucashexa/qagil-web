@@ -1,8 +1,8 @@
 import React from 'react';
-import CreateEvent from '../EndPoints/createEvent';
-import UpdateEvent from '../EndPoints/updateEvent';
-import CreateUserEvent from '../EndPoints/createUserEvent';
-import RemoveEvent from '../EndPoints/deleteEvent';
+import CreateEvent from '../EndPoints/qevent/createEvent';
+import UpdateEvent from '../EndPoints/qevent/updateEvent';
+import CreateUserEvent from '../EndPoints/qevent/createUserEvent';
+import RemoveEvent from '../EndPoints/qevent/deleteEvent';
 
 import { List } from './styles';
 
