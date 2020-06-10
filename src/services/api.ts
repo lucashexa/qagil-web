@@ -6,10 +6,10 @@ export const apiLocal = axios.create({
 
 export const apiQuser = axios.create({
   baseURL:
-    'https://cors-anywhere.herokuapp.com/http://18.230.153.28:8000/quser',
+    'https://cors-anywhere.herokuapp.com/http://54.233.125.231:8080/quser',
 });
 
 export const apiQevent = axios.create({
   baseURL:
-    'https://cors-anywhere.herokuapp.com/http://18.230.153.28:8000/qevent/v1/company',
+    'https://cors-anywhere.herokuapp.com/http://18.228.10.95:8080/qevent/v1/company',
 });
