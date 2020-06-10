@@ -16,16 +16,7 @@ import Button from '../../../components/Button';
 import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 
 interface removeEventFormData {
-  name: string;
-  description: string;
-  email: string;
-  image_url: string;
-  address: string;
-  city: string;
-  neighborhood: string;
-  state: string;
-  lat: number;
-  lng: number;
+  id: string;
 }
 const RemoveEvent: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -46,24 +37,7 @@ const RemoveEvent: React.FC = () => {
           },
         };
 
-        const dataQEvent = {
-          name: data.name,
-          description: data.description,
-          email: data.email,
-          image_url: data.image_url,
-          place: {
-            address: data.address,
-            city: data.city,
-            location: {
-              lat: data.lat,
-              lng: data.lng,
-            },
-            neighborhood: data.neighborhood,
-            state: data.state,
-          },
-        };
-
-        const response = await apiQevent.post('/', dataQEvent, config);
+        const response = await apiQevent.delete(`/${data.id}`, config);
 
         console.log(response.data);
 
@@ -96,10 +70,7 @@ const RemoveEvent: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>deleteEvent</h1>
 
-            <Input name="name" type="text" placeholder="Nome" />
-            <Input name="description" type="text" placeholder="Descrição" />
-            <Input name="email" type="text" placeholder="E-Mail" />
-            <Input name="image_url" type="text" placeholder="Url da imagem" />
+            <Input name="id" type="text" placeholder="Id" />
 
             <Button type="submit">deleteEvent</Button>
           </Form>
