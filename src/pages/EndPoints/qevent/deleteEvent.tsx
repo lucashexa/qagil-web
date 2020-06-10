@@ -43,7 +43,7 @@ const RemoveEvent: React.FC = () => {
 
         addToast({
           type: 'success',
-          title: 'Evento Criado com sucesso',
+          title: 'Evento deletado com sucesso',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
