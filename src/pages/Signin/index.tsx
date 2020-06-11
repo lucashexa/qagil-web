@@ -16,6 +16,8 @@ import logoImg from '../../assets/logo.png';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
 
+import { apiQuser, apiQimage } from '../../services/api';
+
 interface SingInFormData {
   email: string;
   password: string;
@@ -46,6 +48,19 @@ const SignIn: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+
+        const config = {
+          headers: {
+            apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+            'Content-Type': 'application/json',
+          },
+          params: {
+            email: 'lucas@lucas.com',
+          },
+        };
+
+        const userBack = await apiQuser.get('/v1/user/search', config);
+        console.log(userBack);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidarionErrors(err);

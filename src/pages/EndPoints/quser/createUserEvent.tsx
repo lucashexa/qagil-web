@@ -94,12 +94,12 @@ const CreateUserEvent: React.FC = () => {
       <Content>
         <AnimationContainer>
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>CreateUserEvent</h1>
+            <h1>Pending</h1>
 
-            <Input name="name" type="text" placeholder="Nome" />
+            {/* <Input name="name" type="text" placeholder="Nome" />
             <Input name="description" type="text" placeholder="Descrição" />
             <Input name="email" type="text" placeholder="E-Mail" />
-            <Input name="image_url" type="text" placeholder="Url da imagem" />
+            <Input name="image_url" type="text" placeholder="Url da imagem" /> */}
 
             <Button type="submit">CreateUserEvent</Button>
           </Form>
