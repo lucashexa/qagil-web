@@ -15,7 +15,7 @@ import Button from '../../../components/Button';
 
 import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 
-import FormData from 'form-data';
+import { useUserBackend } from '../../../hooks/userBackend';
 
 interface CreateImageFormData {
   name: string;
@@ -34,6 +34,8 @@ const CreateImage: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const { userBackEnd } = useUserBackend();
+  console.log(userBackEnd);
 
   const handleSubmit = async (data: CreateImageFormData) => {
     try {
@@ -41,17 +43,14 @@ const CreateImage: React.FC = () => {
 
       // console.log(file);
 
-      const formData = new FormData();
+      let formData = new FormData();
 
-      formData.append('image', file);
-      // formData.append('name', 'teste');
-      console.log('formData', formData);
-      debugger;
+      formData.append('file', file);
 
       const config = {
         headers: {
           apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
-          user_id: 9,
+          user_id: 10,
           type: 'teste',
           'Content-Type': 'application/x-www-form-urlencoded',
         },

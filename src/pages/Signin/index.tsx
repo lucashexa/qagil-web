@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
+import { useUserBackend, UserBackendState } from '../../hooks/userBackend';
 import getValidarionErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -28,6 +29,7 @@ const SignIn: React.FC = () => {
 
   const { singIn } = useAuth();
   const { addToast } = useToast();
+  const { setUserBackEnd } = useUserBackend();
 
   const handleSubmit = useCallback(
     async (data: SingInFormData) => {
@@ -55,12 +57,12 @@ const SignIn: React.FC = () => {
             'Content-Type': 'application/json',
           },
           params: {
-            email: 'lucas@lucas.com',
+            email: data.email,
           },
         };
 
         const userBack = await apiQuser.get('/v1/user/search', config);
-        console.log(userBack);
+        setUserBackEnd(userBack.data);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidarionErrors(err);
