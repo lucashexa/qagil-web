@@ -1,8 +1,7 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
 
 import { apiQevent } from '../../../services/api';
 
@@ -14,6 +13,8 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
 import { Container, Content, AnimationContainer } from '../../SignUp/styles';
+
+import { useUserBackend } from '../../../hooks/userBackend';
 
 interface CreateEventFormData {
   name: string;
@@ -27,67 +28,79 @@ interface CreateEventFormData {
   lat: number;
   lng: number;
 }
+
+interface IuserBackEnd {
+  user_id: number;
+}
 const CreateEvent: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
-  const history = useHistory();
+  const [userId, setUserId] = useState<number>();
+  const { userBackEnd } = useUserBackend();
+  if (userBackEnd) {
+    const { user_id } = userBackEnd as IuserBackEnd;
+    if (!userId) {
+      setUserId(user_id);
+    }
+    console.log(userBackEnd);
+  }
 
-  const handleSubmit = useCallback(
-    async (data: CreateEventFormData) => {
-      try {
-        formRef.current?.setErrors({});
+  const handleSubmit = async (data: CreateEventFormData) => {
+    try {
+      console.log(userBackEnd);
+      formRef.current?.setErrors({});
 
-        const config = {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
-            'Content-Type': 'application/json',
-            user_id: 9,
+      const config = {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+          'Content-Type': 'application/json',
+          user_id: userId,
+        },
+      };
+
+      console.log('cfg', config);
+
+      const dataQEvent = {
+        name: data.name,
+        description: data.description,
+        email: data.email,
+        image_url: data.image_url,
+        place: {
+          address: data.address,
+          city: data.city,
+          location: {
+            lat: data.lat,
+            lng: data.lng,
           },
-        };
+          neighborhood: data.neighborhood,
+          state: data.state,
+        },
+      };
 
-        const dataQEvent = {
-          name: data.name,
-          description: data.description,
-          email: data.email,
-          image_url: data.image_url,
-          place: {
-            address: data.address,
-            city: data.city,
-            location: {
-              lat: data.lat,
-              lng: data.lng,
-            },
-            neighborhood: data.neighborhood,
-            state: data.state,
-          },
-        };
+      const response = await apiQevent.post('/', dataQEvent, config);
 
-        const response = await apiQevent.post('/', dataQEvent, config);
+      console.log(response.data);
 
-        console.log(response.data);
+      addToast({
+        type: 'success',
+        title: 'Evento Criado com sucesso',
+      });
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidarionErrors(err);
+        formRef.current?.setErrors(errors);
 
-        addToast({
-          type: 'success',
-          title: 'Evento Criado com sucesso',
-        });
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidarionErrors(err);
-          formRef.current?.setErrors(errors);
-
-          return;
-        }
-
-        addToast({
-          type: 'info',
-          title: 'erro na autenticação',
-          description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
-        });
+        return;
       }
-    },
-    [addToast],
-  );
+
+      addToast({
+        type: 'info',
+        title: 'erro na autenticação',
+        description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
+      });
+    }
+  };
 
   return (
     <Container>

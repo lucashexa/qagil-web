@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CreateEvent from '../EndPoints/qevent/createEvent';
 import UpdateEvent from '../EndPoints/qevent/updateEvent';
 import CreateUserEvent from '../EndPoints/qevent/createUserEvent';
@@ -14,7 +14,23 @@ import DeleteImage from '../EndPoints/qimage/deleteImage';
 
 import { List } from './styles';
 
+import { useAuth } from '../../hooks/auth';
+import { useUserBackend } from '../../hooks/userBackend';
+
+import backendUserInformations from '../../utils/backendUserInformations';
+
 const Dashboard: React.FC = () => {
+  const { userBackEnd, setUserBackEnd } = useUserBackend();
+  const { user } = useAuth();
+
+  if (!userBackEnd) {
+    const { email } = user as { email: string };
+    backendUserInformations(email).then((response) => {
+      console.log(response.data);
+      setUserBackEnd(response.data);
+    });
+  }
+
   const [formAtual, setFormAtual] = React.useState('createEvent');
   const telas: { [key: string]: any } = {
     createEvent: <CreateEvent />,

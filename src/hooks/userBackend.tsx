@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 
 interface UserBackendContextData {
-  userBackEnd: object;
+  userBackEnd: object | null;
   setUserBackEnd(object: UserBackendState): void;
 }
 
@@ -14,9 +14,7 @@ const UserBackendContext = createContext<UserBackendContextData>(
 );
 
 const UserBackendProvider: React.FC = ({ children }) => {
-  const [userBackEnd, setUserBackEnd] = useState<UserBackendState>(
-    {} as UserBackendState,
-  );
+  const [userBackEnd, setUserBackEnd] = useState<UserBackendState | null>(null);
 
   return (
     <UserBackendContext.Provider value={{ userBackEnd, setUserBackEnd }}>

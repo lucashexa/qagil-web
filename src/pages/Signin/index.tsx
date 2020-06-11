@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
-import { useUserBackend, UserBackendState } from '../../hooks/userBackend';
 import getValidarionErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -17,7 +16,7 @@ import logoImg from '../../assets/logo.png';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
 
-import { apiQuser, apiQimage } from '../../services/api';
+import backendUserInformations from '../../utils/backendUserInformations';
 
 interface SingInFormData {
   email: string;
@@ -29,7 +28,6 @@ const SignIn: React.FC = () => {
 
   const { singIn } = useAuth();
   const { addToast } = useToast();
-  const { setUserBackEnd } = useUserBackend();
 
   const handleSubmit = useCallback(
     async (data: SingInFormData) => {
@@ -50,19 +48,6 @@ const SignIn: React.FC = () => {
           email: data.email,
           password: data.password,
         });
-
-        const config = {
-          headers: {
-            apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
-            'Content-Type': 'application/json',
-          },
-          params: {
-            email: data.email,
-          },
-        };
-
-        const userBack = await apiQuser.get('/v1/user/search', config);
-        setUserBackEnd(userBack.data);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidarionErrors(err);
