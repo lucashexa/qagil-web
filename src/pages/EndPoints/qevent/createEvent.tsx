@@ -136,22 +136,46 @@ const CreateEvent: React.FC = () => {
     }
   };
 
+  const handleRemoveImage = async () => {
+    await removeImg();
+    setFileResponse({} as fileResponse);
+  };
+
+  const removeImg = async () => {
+    const config = {
+      headers: {
+        apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+        user_id: userId,
+        type: 'qagile-art-event',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    await apiQimage.delete(`/v1/${fileResponse.file_name}`, config);
+  };
+
+  const handleChangeImage = () => {};
+
   return (
     <>
       {event ? (
         <Container>
           <Content>
             <AnimationContainer>
-              <h1>createEvent</h1>
+              <h1>Criar Evento</h1>
               <span>{event.description}</span>
               <span>{event.email}</span>
               {fileResponse.url ? (
-                <img src={fileResponse.url} />
+                <>
+                  <img src={fileResponse.url} />
+                  <button onClick={handleRemoveImage}> remove image</button>
+                  <button onClick={handleChangeImage}> Change image</button>
+                </>
               ) : (
                 <input
                   name="file"
                   type="file"
-                  placeholder="Selecione"
+                  placeholder="Selecione uma imagem para o Evento"
                   onChange={(e) => handleFile(e)}
                 />
               )}
@@ -171,7 +195,7 @@ const CreateEvent: React.FC = () => {
                 <Input
                   name="file"
                   type="file"
-                  placeholder="Selecione"
+                  placeholder="Selecione uma imagem para o Evento"
                   onChange={(e) => handleFile(e)}
                 />
 
