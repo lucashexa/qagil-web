@@ -35,7 +35,7 @@ const CreateImage: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const { userBackEnd } = useUserBackend();
-  console.log(userBackEnd);
+  const { user_id } = userBackEnd as { user_id: number };
 
   const handleSubmit = async (data: CreateImageFormData) => {
     try {
@@ -43,33 +43,16 @@ const CreateImage: React.FC = () => {
 
       // console.log(file);
 
-      let formData = new FormData();
+      const formData = new FormData();
 
       formData.append('file', file);
 
       const config = {
         headers: {
           apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
-          user_id: 10,
-          type: 'teste',
+          user_id,
+          type: 'qagile-art-event',
           'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      };
-
-      const dataQEvent = {
-        name: data.name,
-        description: data.description,
-        email: data.email,
-        image_url: data.image_url,
-        place: {
-          address: data.address,
-          city: data.city,
-          location: {
-            lat: data.lat,
-            lng: data.lng,
-          },
-          neighborhood: data.neighborhood,
-          state: data.state,
         },
       };
 

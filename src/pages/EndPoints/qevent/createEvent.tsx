@@ -3,7 +3,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import { apiQevent } from '../../../services/api';
+import { apiQevent, apiQimage } from '../../../services/api';
 
 import { useToast } from '../../../hooks/toast';
 
@@ -15,6 +15,8 @@ import Button from '../../../components/Button';
 import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 
 import { useUserBackend } from '../../../hooks/userBackend';
+import { getDiffieHellman } from 'crypto';
+import { StringifyOptions } from 'querystring';
 
 interface CreateEventFormData {
   name: string;
@@ -27,28 +29,60 @@ interface CreateEventFormData {
   state: string;
   lat: number;
   lng: number;
+  file: string;
 }
 
 interface IuserBackEnd {
   user_id: number;
 }
+
+interface fileResponse {
+  file_name: string;
+  url: string;
+}
+
 const CreateEvent: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const [userId, setUserId] = useState<number>();
+  const [event, setEvent] = useState<any>();
+  const [file, setFile] = useState<any>();
+  const [fileResponse, setFileResponse] = useState<fileResponse>(
+    {} as fileResponse,
+  );
   const { userBackEnd } = useUserBackend();
   if (userBackEnd) {
     const { user_id } = userBackEnd as IuserBackEnd;
     if (!userId) {
       setUserId(user_id);
     }
-    console.log(userBackEnd);
   }
+
+  const handleFile = async (e: any) => {
+    // Todo Se alterar a imagem, precisa ser excluida a antiga
+
+    const formData = new FormData();
+
+    formData.append('file', e.target.files[0]);
+
+    const config = {
+      headers: {
+        apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+        user_id: userId,
+        type: 'qagile-art-event',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+    const response = await apiQimage.post('/v1', formData, config);
+    console.log(response.data);
+    await setFileResponse(response.data);
+  };
 
   const handleSubmit = async (data: CreateEventFormData) => {
     try {
-      console.log(userBackEnd);
       formRef.current?.setErrors({});
+
+      // await getFile();
 
       const config = {
         headers: {
@@ -59,28 +93,28 @@ const CreateEvent: React.FC = () => {
         },
       };
 
-      console.log('cfg', config);
+      console.log('cfg', fileResponse);
 
       const dataQEvent = {
         name: data.name,
         description: data.description,
         email: data.email,
-        image_url: data.image_url,
+        image_url: fileResponse.url,
         place: {
-          address: data.address,
-          city: data.city,
+          address: '',
+          city: '',
           location: {
-            lat: data.lat,
-            lng: data.lng,
+            lat: 0,
+            lng: 0,
           },
-          neighborhood: data.neighborhood,
-          state: data.state,
+          neighborhood: '',
+          state: '',
         },
       };
 
       const response = await apiQevent.post('/', dataQEvent, config);
 
-      console.log(response.data);
+      setEvent(response.data);
 
       addToast({
         type: 'success',
@@ -103,28 +137,51 @@ const CreateEvent: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Content>
-        <AnimationContainer>
-          <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>createEvent</h1>
+    <>
+      {event ? (
+        <Container>
+          <Content>
+            <AnimationContainer>
+              <h1>createEvent</h1>
+              <span>{event.description}</span>
+              <span>{event.email}</span>
+              {fileResponse.url ? (
+                <img src={fileResponse.url} />
+              ) : (
+                <input
+                  name="file"
+                  type="file"
+                  placeholder="Selecione"
+                  onChange={(e) => handleFile(e)}
+                />
+              )}
+            </AnimationContainer>
+          </Content>
+        </Container>
+      ) : (
+        <Container>
+          <Content>
+            <AnimationContainer>
+              <Form ref={formRef} onSubmit={handleSubmit}>
+                <h1>createEvent</h1>
 
-            <Input name="name" type="text" placeholder="Nome" />
-            <Input name="description" type="text" placeholder="Descrição" />
-            <Input name="email" type="text" placeholder="E-Mail" />
-            <Input name="image_url" type="text" placeholder="Url da imagem" />
-            <Input name="address" type="text" placeholder="Rua" />
-            <Input name="city" type="text" placeholder="Cidade" />
-            <Input name="lat" type="text" placeholder="Latitude" />
-            <Input name="lng" type="text" placeholder="Logitude" />
-            <Input name="neighborhood" type="text" placeholder="Neighborhood" />
-            <Input name="state" type="text" placeholder="State" />
+                <Input name="name" type="text" placeholder="Nome" />
+                <Input name="description" type="text" placeholder="Descrição" />
+                <Input name="email" type="text" placeholder="E-Mail" />
+                <Input
+                  name="file"
+                  type="file"
+                  placeholder="Selecione"
+                  onChange={(e) => handleFile(e)}
+                />
 
-            <Button type="submit">createEvent</Button>
-          </Form>
-        </AnimationContainer>
-      </Content>
-    </Container>
+                <Button type="submit">createEvent</Button>
+              </Form>
+            </AnimationContainer>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 };
 
