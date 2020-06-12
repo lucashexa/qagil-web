@@ -34,23 +34,23 @@ const Dashboard: React.FC = () => {
   const [formAtual, setFormAtual] = React.useState('createEvent');
   const telas: { [key: string]: any } = {
     createEvent: <CreateEvent />,
-    updateEvent: <UpdateEvent />,
-    createUserEvent: <CreateUserEvent />,
-    removeEvent: <RemoveEvent />,
+    // updateEvent: <UpdateEvent />,
+    // createUserEvent: <CreateUserEvent />,
+    // removeEvent: <RemoveEvent />,
 
-    createUserEventUser: <CreateUserEventUser />,
-    getSearchUser: <GetSeatchUser />,
-    getUserEvent: <GetUserEvent />,
-    updateEventUser: <UpdateEventUser />,
+    // createUserEventUser: <CreateUserEventUser />,
+    // getSearchUser: <GetSeatchUser />,
+    // getUserEvent: <GetUserEvent />,
+    // updateEventUser: <UpdateEventUser />,
 
-    createImage: <CreateImage />,
-    deleteImage: <DeleteImage />,
+    // createImage: <CreateImage />,
+    // deleteImage: <DeleteImage />,
   };
 
   return (
     <>
       {telas[formAtual]}
-
+      {/*
       <List>
         <div>
           <h1>Event Services</h1>
@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
           </span>{' '}
           <br />
         </div>
-      </List>
+      </List> */}
     </>
   );
 };

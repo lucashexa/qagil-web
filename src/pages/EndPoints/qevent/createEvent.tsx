@@ -17,6 +17,7 @@ import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 import { useUserBackend } from '../../../hooks/userBackend';
 import { getDiffieHellman } from 'crypto';
 import { StringifyOptions } from 'querystring';
+import { FiAlignCenter } from 'react-icons/fi';
 
 interface CreateEventFormData {
   name: string;
@@ -56,6 +57,23 @@ const CreateEvent: React.FC = () => {
       setUserId(user_id);
     }
   }
+
+  const backgroundCSS = {
+    backgroundImage: `url("${
+      fileResponse.url
+        ? fileResponse.url
+        : 'https://cdn5.vectorstock.com/i/thumb-large/76/79/your-logo-here-placeholder-symbol-vector-26077679.jpg'
+    } "`,
+    backgroundPosition: 'center',
+    height: '100px',
+    width: '100px',
+    borderRadius: '50%',
+    backgroundSize: 'cover',
+    cursor: 'pointer',
+    margin: 'auto',
+    marginBottom: '20px',
+    backgroundRepeat: 'no-repeat',
+  };
 
   const handleFile = async (e: any) => {
     // Todo Se alterar a imagem, precisa ser excluida a antiga
@@ -178,14 +196,14 @@ const CreateEvent: React.FC = () => {
               <span>{event.email}</span>
               {fileResponse.url ? (
                 <>
-                  <img src={fileResponse.url} />
-                  <button onClick={handleRemoveImage}> remove image</button>
                   <input
                     name="file"
                     type="file"
                     placeholder="Alterar imagem"
                     onChange={(e) => handleFile(e)}
                   />
+                  <img src={fileResponse.url} />
+                  <button onClick={handleRemoveImage}> remove image</button>
                 </>
               ) : (
                 <input
@@ -203,19 +221,31 @@ const CreateEvent: React.FC = () => {
           <Content>
             <AnimationContainer>
               <Form ref={formRef} onSubmit={handleSubmit}>
-                <h1>createEvent</h1>
+                <h1>Evento</h1>
 
+                <div style={backgroundCSS}>
+                  <input
+                    style={{
+                      zIndex: -1,
+                      opacity: 0,
+                      height: '100px',
+                      width: '100px',
+                      borderRadius: '50%',
+                      backgroundSize: 'cover',
+                      cursor: 'pointer',
+                      margin: 'auto',
+                      marginBottom: '20px',
+                    }}
+                    name="file"
+                    type="file"
+                    onChange={(e) => handleFile(e)}
+                  />
+                </div>
                 <Input name="name" type="text" placeholder="Nome" />
                 <Input name="description" type="text" placeholder="Descrição" />
                 <Input name="email" type="text" placeholder="E-Mail" />
-                <Input
-                  name="file"
-                  type="file"
-                  placeholder="Selecione uma imagem para o Evento"
-                  onChange={(e) => handleFile(e)}
-                />
 
-                <Button type="submit">createEvent</Button>
+                <Button type="submit">Criar Evento</Button>
               </Form>
             </AnimationContainer>
           </Content>
