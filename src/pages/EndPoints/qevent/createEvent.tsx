@@ -18,6 +18,7 @@ import { useUserBackend } from '../../../hooks/userBackend';
 import { getDiffieHellman } from 'crypto';
 import { StringifyOptions } from 'querystring';
 import { FiAlignCenter } from 'react-icons/fi';
+import { between } from 'polished';
 
 interface CreateEventFormData {
   name: string;
@@ -47,6 +48,8 @@ const CreateEvent: React.FC = () => {
   const { addToast } = useToast();
   const [userId, setUserId] = useState<number>();
   const [event, setEvent] = useState<any>();
+  const [firstRegister, setFirstRegister] = useState<boolean>(true);
+  const [onEditMode, setOnEditMode] = useState<boolean>(true);
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
@@ -70,9 +73,20 @@ const CreateEvent: React.FC = () => {
     borderRadius: '50%',
     backgroundSize: 'cover',
     cursor: 'pointer',
-    margin: 'auto',
-    marginBottom: '20px',
+    // margin: 'auto',
     backgroundRepeat: 'no-repeat',
+  };
+
+  const inputCSS = {
+    zIndex: -1,
+    opacity: 0,
+    height: '100px',
+    width: '100px',
+    borderRadius: '50%',
+    backgroundSize: 'cover',
+    cursor: 'pointer',
+    margin: 'auto',
+    marginTop: '10px',
   };
 
   const handleFile = async (e: any) => {
@@ -127,14 +141,27 @@ const CreateEvent: React.FC = () => {
         },
       };
 
-      const response = await apiQevent.post('/', dataQEvent, config);
-
-      setEvent(response.data);
-
-      addToast({
-        type: 'success',
-        title: 'Evento Criado com sucesso',
-      });
+      if (onEditMode && !firstRegister) {
+        const response = await apiQevent.put(
+          `/${event.id}`,
+          dataQEvent,
+          config,
+        );
+        setEvent(response.data);
+        addToast({
+          type: 'success',
+          title: 'Evento editado com sucesso',
+        });
+      } else {
+        const response = await apiQevent.post('/', dataQEvent, config);
+        setEvent(response.data);
+        addToast({
+          type: 'success',
+          title: 'Evento Criado com sucesso',
+        });
+        setFirstRegister(false);
+      }
+      setOnEditMode(false);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidarionErrors(err);
@@ -168,78 +195,49 @@ const CreateEvent: React.FC = () => {
 
     await apiQimage.delete(`/v1/${fileResponse.file_name}`, configImg);
 
-    const config = {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
-        'Content-Type': 'application/json',
-        user_id: userId,
-      },
-    };
+    if (event) {
+      const config = {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+          'Content-Type': 'application/json',
+          user_id: userId,
+        },
+      };
+      const dataQEvent = {
+        image_url: '',
+      };
+      const response = await apiQevent.put(`/${event.id}`, dataQEvent, config);
 
-    const dataQEvent = {
-      image_url: '',
-    };
-    const response = await apiQevent.put(`/${event.id}`, dataQEvent, config);
+      console.log(response);
+    } else {
+      console.log('nao entrei');
+    }
+  };
 
-    console.log(response);
+  const handleEditEvent = async () => {
+    setOnEditMode(true);
   };
 
   return (
     <>
-      {event ? (
-        <Container>
-          <Content>
-            <AnimationContainer>
-              <h1>Criar Evento</h1>
-              <span>{event.description}</span>
-              <span>{event.email}</span>
-              {fileResponse.url ? (
-                <>
-                  <input
-                    name="file"
-                    type="file"
-                    placeholder="Alterar imagem"
-                    onChange={(e) => handleFile(e)}
-                  />
-                  <img src={fileResponse.url} />
-                  <button onClick={handleRemoveImage}> remove image</button>
-                </>
-              ) : (
-                <input
-                  name="file"
-                  type="file"
-                  placeholder="Selecione uma imagem para o Evento"
-                  onChange={(e) => handleFile(e)}
-                />
-              )}
-            </AnimationContainer>
-          </Content>
-        </Container>
-      ) : (
+      {!event || onEditMode ? (
+        //edit mode
         <Container>
           <Content>
             <AnimationContainer>
               <Form ref={formRef} onSubmit={handleSubmit}>
                 <h1>Evento</h1>
 
-                <div style={backgroundCSS}>
-                  <input
-                    style={{
-                      zIndex: -1,
-                      opacity: 0,
-                      height: '100px',
-                      width: '100px',
-                      borderRadius: '50%',
-                      backgroundSize: 'cover',
-                      cursor: 'pointer',
-                      margin: 'auto',
-                      marginBottom: '20px',
-                    }}
-                    name="file"
-                    type="file"
-                    onChange={(e) => handleFile(e)}
-                  />
+                <div style={{ margin: 'auto', maxWidth: '100px' }}>
+                  <div style={backgroundCSS}>
+                    <input
+                      style={inputCSS}
+                      name="file"
+                      type="file"
+                      onChange={(e) => handleFile(e)}
+                    />
+                  </div>
                 </div>
                 <Input name="name" type="text" placeholder="Nome" />
                 <Input name="description" type="text" placeholder="Descrição" />
@@ -247,6 +245,45 @@ const CreateEvent: React.FC = () => {
 
                 <Button type="submit">Criar Evento</Button>
               </Form>
+            </AnimationContainer>
+          </Content>
+        </Container>
+      ) : (
+        //card mode
+        <Container>
+          <Content>
+            <AnimationContainer>
+              {/* <h1>Informações do evento do(a) {event.name} </h1> */}
+              <div
+                style={{
+                  display: 'flex',
+                  marginTop: '20px',
+                  border: '2px solid #ff9000',
+                  borderRadius: '10px',
+                  width: '400px',
+                  justifyContent: 'space-around',
+                  alignItems: 'center',
+                  padding: '10px',
+                  flex: 1,
+                }}
+              >
+                <div style={backgroundCSS}>
+                  <input
+                    style={inputCSS}
+                    name="file"
+                    type="file"
+                    onChange={(e) => handleFile(e)}
+                  />
+                </div>
+
+                {/* <button onClick={handleRemoveImage}> remove image</button> */}
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {/* <span>{event.description}</span>
+                <span>{event.email}</span> */}
+                </div>
+              </div>
+              <button> excluir evento </button>
+              <button onClick={handleEditEvent}> Editar Evento </button>
             </AnimationContainer>
           </Content>
         </Container>
