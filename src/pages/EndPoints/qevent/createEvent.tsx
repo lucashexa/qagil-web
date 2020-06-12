@@ -219,6 +219,48 @@ const CreateEvent: React.FC = () => {
     setOnEditMode(true);
   };
 
+  const handleDeleteEvent = async () => {
+    try {
+      formRef.current?.setErrors({});
+
+      const config = {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+          'Content-Type': 'application/json',
+          user_id: userId,
+        },
+      };
+
+      const response = await apiQevent.delete(`/${event.id}`, config);
+
+      console.log(response.data);
+
+      setFileResponse({} as fileResponse);
+
+      addToast({
+        type: 'success',
+        title: 'Evento deletado com sucesso',
+      });
+
+      setEvent(null);
+      removeImg();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidarionErrors(err);
+        formRef.current?.setErrors(errors);
+
+        return;
+      }
+
+      addToast({
+        type: 'info',
+        title: 'erro na autenticação',
+        description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
+      });
+    }
+  };
+
   return (
     <>
       {!event || onEditMode ? (
@@ -243,7 +285,15 @@ const CreateEvent: React.FC = () => {
                 <Input name="description" type="text" placeholder="Descrição" />
                 <Input name="email" type="text" placeholder="E-Mail" />
 
-                <Button type="submit">Criar Evento</Button>
+                <Button type="submit">
+                  {onEditMode && !firstRegister ? 'Editar' : 'Criar'} Evento
+                </Button>
+                {onEditMode && !firstRegister && (
+                  <Button type="button" onClick={() => setOnEditMode(false)}>
+                    {' '}
+                    Cancelar Edição{' '}
+                  </Button>
+                )}
               </Form>
             </AnimationContainer>
           </Content>
@@ -278,12 +328,18 @@ const CreateEvent: React.FC = () => {
 
                 {/* <button onClick={handleRemoveImage}> remove image</button> */}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  {/* <span>{event.description}</span>
-                <span>{event.email}</span> */}
+                  <span>{event.description}</span>
+                  <span>{event.email}</span>
                 </div>
               </div>
-              <button> excluir evento </button>
-              <button onClick={handleEditEvent}> Editar Evento </button>
+              <Button type={'button'} onClick={handleEditEvent}>
+                {' '}
+                Editar Evento{' '}
+              </Button>
+              <Button type={'button'} onClick={handleDeleteEvent}>
+                {' '}
+                excluir evento{' '}
+              </Button>
             </AnimationContainer>
           </Content>
         </Container>
