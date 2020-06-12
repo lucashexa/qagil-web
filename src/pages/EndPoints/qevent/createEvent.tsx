@@ -61,6 +61,9 @@ const CreateEvent: React.FC = () => {
   const handleFile = async (e: any) => {
     // Todo Se alterar a imagem, precisa ser excluida a antiga
 
+    if (fileResponse.url) {
+      removeImg();
+    }
     const formData = new FormData();
 
     formData.append('file', e.target.files[0]);
@@ -151,6 +154,8 @@ const CreateEvent: React.FC = () => {
       },
     };
 
+    console.log('img anterior removida');
+
     await apiQimage.delete(`/v1/${fileResponse.file_name}`, config);
   };
 
@@ -169,7 +174,12 @@ const CreateEvent: React.FC = () => {
                 <>
                   <img src={fileResponse.url} />
                   <button onClick={handleRemoveImage}> remove image</button>
-                  <button onClick={handleChangeImage}> Change image</button>
+                  <input
+                    name="file"
+                    type="file"
+                    placeholder="Alterar imagem"
+                    onChange={(e) => handleFile(e)}
+                  />
                 </>
               ) : (
                 <input
