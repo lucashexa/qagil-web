@@ -46,7 +46,6 @@ const CreateEvent: React.FC = () => {
   const { addToast } = useToast();
   const [userId, setUserId] = useState<number>();
   const [event, setEvent] = useState<any>();
-  const [file, setFile] = useState<any>();
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
@@ -77,15 +76,12 @@ const CreateEvent: React.FC = () => {
       },
     };
     const response = await apiQimage.post('/v1', formData, config);
-    console.log(response.data);
     await setFileResponse(response.data);
   };
 
   const handleSubmit = async (data: CreateEventFormData) => {
     try {
       formRef.current?.setErrors({});
-
-      // await getFile();
 
       const config = {
         headers: {
@@ -95,8 +91,6 @@ const CreateEvent: React.FC = () => {
           user_id: userId,
         },
       };
-
-      console.log('cfg', fileResponse);
 
       const dataQEvent = {
         name: data.name,
@@ -145,7 +139,7 @@ const CreateEvent: React.FC = () => {
   };
 
   const removeImg = async () => {
-    const config = {
+    const configImg = {
       headers: {
         apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
         user_id: userId,
@@ -154,12 +148,24 @@ const CreateEvent: React.FC = () => {
       },
     };
 
-    console.log('img anterior removida');
+    await apiQimage.delete(`/v1/${fileResponse.file_name}`, configImg);
 
-    await apiQimage.delete(`/v1/${fileResponse.file_name}`, config);
+    const config = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+        'Content-Type': 'application/json',
+        user_id: userId,
+      },
+    };
+
+    const dataQEvent = {
+      image_url: '',
+    };
+    const response = await apiQevent.put(`/${event.id}`, dataQEvent, config);
+
+    console.log(response);
   };
-
-  const handleChangeImage = () => {};
 
   return (
     <>
