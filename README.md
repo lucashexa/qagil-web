@@ -23,7 +23,7 @@
 
 ![App Screenshot](src/assets/demoQAgil.gif)
 
-<p align="center">
+<!-- <p align="center">
   <h5 align="center">
     Available on GiHub Pages
   </h5>
@@ -33,7 +33,7 @@
   <a align="center" href="http://lucaswebs.com/playlist/index.html" target="_blank">
     <img alt="Github Pages" src="https://res.cloudinary.com/dwudlwkie/image/upload/v1580429605/sdsd_qltl17.png">
   </a>
-</p>
+</p> -->
 
 ## :rocket: Technologies
 
@@ -43,8 +43,13 @@ This project was developed just for study with the technologies:
 - [React Router v4](https://github.com/ReactTraining/react-router)
 - [styled-components](https://www.styled-components.com/)
 - [React-Icons](https://react-icons.netlify.com/)
-- [Redux](https://redux.js.org/)
-- [FireBase](https://firebase.google.com/?hl=pt-br)
+- [Axios](https://github.com/axios/axios)
+- [Unform](https://github.com/Rocketseat/unform)
+- [Polished](https://polished.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [uuidv4](https://github.com/thenativeweb/uuidv4)
+- [yup](https://github.com/jquense/yup)
+- [react-spring](https://www.react-spring.io/)
 - [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
 
 ## :information_source: How To Use
@@ -53,13 +58,13 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lucmkz/playlist-react-Js
+$ git clone https://github.com/lucmkz/qagil-web
 
 # Go into the repository
-$ cd playlist-react-Js
+$ cd https://github.com/lucmkz/qagil-web
 
 # Install dependencies
-$ yarn install
+$ yarn
 
 # Run the app
 $ yarn start
