@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import CreateEvent from '../EndPoints/qevent/createEvent';
+import Header from '../../components/Header';
 import UpdateEvent from '../EndPoints/qevent/updateEvent';
 import CreateUserEvent from '../EndPoints/qevent/createUserEvent';
 import RemoveEvent from '../EndPoints/qevent/deleteEvent';
@@ -49,6 +50,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+      <Header />
       {telas[formAtual]}
       {/*
       <List>

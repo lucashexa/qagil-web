@@ -271,7 +271,13 @@ const CreateEvent: React.FC = () => {
               <Form ref={formRef} onSubmit={handleSubmit}>
                 <h1>Evento</h1>
 
-                <div style={{ margin: 'auto', maxWidth: '100px' }}>
+                <div
+                  style={{
+                    margin: 'auto',
+                    maxWidth: '100px',
+                    marginBottom: '20px',
+                  }}
+                >
                   <div style={backgroundCSS}>
                     <input
                       style={inputCSS}
