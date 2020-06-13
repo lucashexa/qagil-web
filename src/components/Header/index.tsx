@@ -64,6 +64,8 @@ const Header: React.FC = () => {
   };
 
   const handleFile = async (e: any) => {
+    console.log('fileResponse', fileResponse);
+    console.log('userBackEnd', userBackEnd);
     const formData = new FormData();
 
     formData.append('file', e.target.files[0]);

@@ -7,7 +7,7 @@
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/lucmkz/qagil-web.svg">
 
   <img alt="Repository size" src="https://img.shields.io/github/languages/code-size/lucmkz/qagil-web.svg">
-  
+
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lucmkz/qagil-web.svg">
 
   <img alt="Repository issues" src="https://img.shields.io/github/issues/lucmkz/qagil-web.svg">
@@ -21,7 +21,8 @@
   <a href="#memo-license">License</a>
 </p>
 
-![App Screenshot](src/assets/screenAppliction.png)
+![App Screenshot](src/assets/demoQAgil.gif)
+
 <p align="center">
   <h5 align="center">
     Available on GiHub Pages
@@ -34,18 +35,17 @@
   </a>
 </p>
 
-
 ## :rocket: Technologies
 
 This project was developed just for study with the technologies:
 
--  [ReactJS](https://reactjs.org/)
--  [React Router v4](https://github.com/ReactTraining/react-router)
--  [styled-components](https://www.styled-components.com/)
--  [React-Icons](https://react-icons.netlify.com/)
--  [Redux](https://redux.js.org/)
--  [FireBase](https://firebase.google.com/?hl=pt-br)
--  [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
+- [ReactJS](https://reactjs.org/)
+- [React Router v4](https://github.com/ReactTraining/react-router)
+- [styled-components](https://www.styled-components.com/)
+- [React-Icons](https://react-icons.netlify.com/)
+- [Redux](https://redux.js.org/)
+- [FireBase](https://firebase.google.com/?hl=pt-br)
+- [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
 
 ## :information_source: How To Use
 
@@ -66,6 +66,7 @@ $ yarn start
 ```
 
 ## :memo: License
+
 This project is under the MIT license. See the [LICENSE]() for more information.
 
 ---
