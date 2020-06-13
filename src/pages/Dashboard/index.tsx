@@ -21,6 +21,7 @@ import { useUserBackend } from '../../hooks/userBackend';
 import backendUserInformations from '../../utils/backendUserInformations';
 
 const Dashboard: React.FC = () => {
+  // console.log(process.env.REACT_APP_KEY);
   const { userBackEnd, setUserBackEnd } = useUserBackend();
   const { user } = useAuth();
 

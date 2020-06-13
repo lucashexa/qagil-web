@@ -101,7 +101,7 @@ const CreateEvent: React.FC = () => {
 
     const config = {
       headers: {
-        apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+        apikey: process.env.REACT_APP_API_KEY,
         user_id: userId,
         type: 'qagile-art-event',
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -118,7 +118,7 @@ const CreateEvent: React.FC = () => {
       const config = {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+          apikey: process.env.REACT_APP_API_KEY,
           'Content-Type': 'application/json',
           user_id: userId,
         },
@@ -186,7 +186,7 @@ const CreateEvent: React.FC = () => {
   const removeImg = async () => {
     const configImg = {
       headers: {
-        apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+        apikey: process.env.REACT_APP_API_KEY,
         user_id: userId,
         type: 'qagile-art-event',
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -199,7 +199,7 @@ const CreateEvent: React.FC = () => {
       const config = {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+          apikey: process.env.REACT_APP_API_KEY,
           'Content-Type': 'application/json',
           user_id: userId,
         },
@@ -226,7 +226,7 @@ const CreateEvent: React.FC = () => {
       const config = {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+          apikey: process.env.REACT_APP_API_KEY,
           'Content-Type': 'application/json',
           user_id: userId,
         },

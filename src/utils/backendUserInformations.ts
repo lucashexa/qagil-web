@@ -4,7 +4,7 @@ import { useUserBackend } from '../hooks/userBackend';
 const backendUserInformations = async (email: any) => {
   const config = {
     headers: {
-      apikey: 'a6ad62eb-d6d7-4b05-85fa-d1da8c5d7c6e',
+      apikey: process.env.REACT_APP_API_KEY,
       'Content-Type': 'application/json',
     },
     params: {

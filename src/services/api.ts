@@ -1,20 +1,17 @@
 import axios from 'axios';
 
 export const apiLocal = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: `${process.env.REACT_APP_API_AUTH_LOCAL}`,
 });
 
 export const apiQuser = axios.create({
-  baseURL:
-    'https://cors-anywhere.herokuapp.com/http://54.233.125.231:8080/quser',
+  baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_QUSER_URL}`,
 });
 
 export const apiQevent = axios.create({
-  baseURL:
-    'https://cors-anywhere.herokuapp.com/http://18.228.10.95:8080/qevent/v1/company',
+  baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_QEVENT_URL}/v1/company`,
 });
 
 export const apiQimage = axios.create({
-  baseURL:
-    'https://cors-anywhere.herokuapp.com/http://18.230.144.102:8080/qimage',
+  baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_QIMAGE_URL}`,
 });
