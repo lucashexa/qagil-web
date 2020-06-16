@@ -4,12 +4,14 @@ import Header from '../../components/Header';
 
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
+import { useEvent } from '../../hooks/event';
 
 import backendUserInformations from '../../utils/backendUserInformations';
 
 const Dashboard: React.FC = () => {
   const { userBackEnd, setUserBackEnd } = useUserBackend();
   const { user } = useAuth();
+  const { event } = useEvent();
 
   if (!userBackEnd) {
     const { email } = user as { email: string };
@@ -23,6 +25,7 @@ const Dashboard: React.FC = () => {
     <>
       <Header />
       <CreateEvent />
+      {event && <h1>teste</h1>}
     </>
   );
 };

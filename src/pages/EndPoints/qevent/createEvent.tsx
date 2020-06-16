@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 import { apiQevent, apiQimage } from '../../../services/api';
 
 import { useToast } from '../../../hooks/toast';
+import { useEvent, EventState } from '../../../hooks/event';
+import { useUserBackend } from '../../../hooks/userBackend';
 
 import getValidarionErrors from '../../../utils/getValidationErrors';
 
@@ -13,12 +15,6 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 
 import { Container, Content, AnimationContainer } from '../../SignUp/styles';
-
-import { useUserBackend } from '../../../hooks/userBackend';
-import { getDiffieHellman } from 'crypto';
-import { StringifyOptions } from 'querystring';
-import { FiAlignCenter } from 'react-icons/fi';
-import { between } from 'polished';
 
 interface CreateEventFormData {
   name: string;
@@ -47,7 +43,7 @@ const CreateEvent: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const [userId, setUserId] = useState<number>();
-  const [event, setEvent] = useState<any>();
+  const { event, setEvent } = useEvent();
   const [firstRegister, setFirstRegister] = useState<boolean>(true);
   const [onEditMode, setOnEditMode] = useState<boolean>(true);
   const [fileResponse, setFileResponse] = useState<fileResponse>(
@@ -143,7 +139,7 @@ const CreateEvent: React.FC = () => {
 
       if (onEditMode && !firstRegister) {
         const response = await apiQevent.put(
-          `/${event.id}`,
+          `/${event?.id}`,
           dataQEvent,
           config,
         );
@@ -232,7 +228,7 @@ const CreateEvent: React.FC = () => {
         },
       };
 
-      const response = await apiQevent.delete(`/${event.id}`, config);
+      const response = await apiQevent.delete(`/${event?.id}`, config);
 
       console.log(response.data);
 
@@ -243,7 +239,9 @@ const CreateEvent: React.FC = () => {
         title: 'Evento deletado com sucesso',
       });
 
-      setEvent(null);
+      setEvent({} as EventState);
+      setOnEditMode(true);
+      setFirstRegister(true);
       removeImg();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
