@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CreateEvent from '../EndPoints/qevent/createEvent';
+import Menu from '../EndPoints/qevent/Menu';
 import Header from '../../components/Header';
 
 import { useAuth } from '../../hooks/auth';
@@ -7,6 +8,8 @@ import { useUserBackend } from '../../hooks/userBackend';
 import { useEvent } from '../../hooks/event';
 
 import backendUserInformations from '../../utils/backendUserInformations';
+
+import { Content } from './styles';
 
 const Dashboard: React.FC = () => {
   const { userBackEnd, setUserBackEnd } = useUserBackend();
@@ -24,8 +27,11 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Header />
-      <CreateEvent />
-      {event && <h1>teste</h1>}
+      <Content>
+        <CreateEvent />
+        {true && <Menu />}
+        {/* {event && <Menu />} */}
+      </Content>
     </>
   );
 };
