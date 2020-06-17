@@ -29,8 +29,8 @@ const Dashboard: React.FC = () => {
       <Header />
       <Content>
         <CreateEvent />
-        {true && <Menu />}
-        {/* {event && <Menu />} */}
+        {/* {true && <Menu />} */}
+        {event && <Menu />}
       </Content>
     </>
   );
