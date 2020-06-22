@@ -39,6 +39,10 @@ const SingUp: React.FC = () => {
             .required('Email obrigatório')
             .email('Email Obrigatório'),
           password: Yup.string().min(6, 'No mínimo 6 digitos'),
+          confirmpassword: Yup.string().oneOf(
+            [Yup.ref('password'), null],
+            'As senhas não correspondem',
+          ),
         });
 
         await schema.validate(data, {
@@ -111,6 +115,12 @@ const SingUp: React.FC = () => {
               icon={FiLock}
               type="password"
               placeholder="Senha"
+            />
+            <Input
+              name="confirmpassword"
+              icon={FiLock}
+              type="password"
+              placeholder="Confirmar Senha"
             />
 
             <Button type="submit">Cadastrar</Button>
