@@ -12,6 +12,7 @@ export const apiQevent = axios.create({
   baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_QEVENT_URL}/v1/company`,
 });
 
+//
 export const apiQimage = axios.create({
   baseURL: `https://cors-anywhere.herokuapp.com/${process.env.REACT_APP_QIMAGE_URL}`,
 });
