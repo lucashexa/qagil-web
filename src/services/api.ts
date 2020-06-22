@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const apiLocal = axios.create({
-  baseURL: `${process.env.REACT_APP_API_AUTH_LOCAL}`,
+  baseURL: `${process.env.REACT_APP_API_AUTH}`,
 });
 
 export const apiQuser = axios.create({

@@ -261,6 +261,7 @@ const CreateEvent: React.FC = () => {
 
   return (
     <>
+      {/* {event || !onEditMode ? ( */}
       {!event || onEditMode ? (
         //edit mode
         <Container>
@@ -332,8 +333,8 @@ const CreateEvent: React.FC = () => {
 
                 {/* <button onClick={handleRemoveImage}> remove image</button> */}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span>{event.description}</span>
-                  <span>{event.email}</span>
+                  <span>{'event.description'}</span>
+                  <span>{'event.email'}</span>
                 </div>
               </div>
               <Button type={'button'} onClick={handleEditEvent}>
