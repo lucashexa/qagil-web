@@ -1,6 +1,6 @@
 import React from 'react';
-import CreateEvent from '../EndPoints/qevent/createEvent';
-import Menu from '../EndPoints/qevent/Menu';
+import CreateEvent from '../Evento';
+import Menu from '../Evento/Menu';
 import Header from '../../components/Header';
 
 import { useAuth } from '../../hooks/auth';
