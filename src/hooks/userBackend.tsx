@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useState, useContext } from 'react';
 
 interface UserBackendContextData {
   userBackEnd: object | null;
-  setUserBackEnd(object: UserBackendState): void;
+  setUserBackEnd(object: UserBackendState | null): void;
 }
 
 export interface UserBackendState {

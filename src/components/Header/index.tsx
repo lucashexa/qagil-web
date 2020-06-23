@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logoImg from '../../assets/logo.png';
 import { AiOutlinePoweroff } from 'react-icons/all';
 import { useAuth } from '../../hooks/auth';
@@ -29,11 +29,15 @@ interface fileResponse {
 
 const Header: React.FC = () => {
   const { singOut, user }: any = useAuth();
-  const { userBackEnd } = useUserBackend();
+  const { userBackEnd, setUserBackEnd } = useUserBackend();
   const [userId, setUserId] = useState<number>();
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
+
+  useEffect(() => {
+    updateUser();
+  }, [fileResponse]);
 
   if (userBackEnd) {
     const { user_id, image } = userBackEnd as IuserBackEnd;
@@ -49,6 +53,11 @@ const Header: React.FC = () => {
       setUserId(user_id);
     }
   }
+
+  const handleSingOut = () => {
+    setUserBackEnd(null);
+    singOut();
+  };
 
   const handleFile = async (e: any) => {
     const formData = new FormData();
@@ -66,7 +75,9 @@ const Header: React.FC = () => {
     const response = await apiQimage.post('/v1', formData, config);
 
     await setFileResponse(response.data);
+  };
 
+  const updateUser = async () => {
     const dataUpdateImg = {
       image: fileResponse.url,
     };
@@ -83,7 +94,8 @@ const Header: React.FC = () => {
       dataUpdateImg,
       configUpdateImg,
     );
-    console.log(responseUser);
+
+    console.log('responseUser', responseUser);
   };
 
   return (
@@ -105,7 +117,7 @@ const Header: React.FC = () => {
           </div>
         </ProfileInfos>
       </SubContainer>
-      <AiOutlinePoweroff onClick={singOut} />
+      <AiOutlinePoweroff onClick={handleSingOut} />
     </Container>
   );
 };
