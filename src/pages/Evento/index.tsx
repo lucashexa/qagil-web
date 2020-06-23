@@ -16,7 +16,15 @@ import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer } from '../SignUp/styles';
 
-import { BackgroundInput } from './style';
+import {
+  BackgroundInput,
+  InputFile,
+  ContainerEvent,
+  BoxCard,
+  ContentCard,
+} from './style';
+
+import input from '../../components/Input';
 
 interface CreateEventFormData {
   name: string;
@@ -58,18 +66,6 @@ const Event: React.FC = () => {
       setUserId(user_id);
     }
   }
-
-  const inputCSS = {
-    zIndex: -1,
-    opacity: 0,
-    height: '100px',
-    width: '100px',
-    borderRadius: '50%',
-    backgroundSize: 'cover',
-    cursor: 'pointer',
-    margin: 'auto',
-    marginTop: '10px',
-  };
 
   const handleFile = async (e: any) => {
     // Todo Se alterar a imagem, precisa ser excluida a antiga
@@ -256,22 +252,15 @@ const Event: React.FC = () => {
               <Form ref={formRef} onSubmit={handleSubmit}>
                 <h1>Evento</h1>
 
-                <div
-                  style={{
-                    margin: 'auto',
-                    maxWidth: '100px',
-                    marginBottom: '20px',
-                  }}
-                >
+                <ContainerEvent>
                   <BackgroundInput fileResponse={fileResponse}>
-                    <input
-                      style={inputCSS}
+                    <InputFile
                       name="file"
                       type="file"
-                      onChange={(e) => handleFile(e)}
+                      onChange={(e: any) => handleFile(e)}
                     />
                   </BackgroundInput>
-                </div>
+                </ContainerEvent>
                 <Input name="name" type="text" placeholder="Nome" />
                 <Input name="description" type="text" placeholder="Descrição" />
                 <Input name="email" type="text" placeholder="E-Mail" />
@@ -295,34 +284,21 @@ const Event: React.FC = () => {
           <Content>
             <AnimationContainer>
               {/* <h1>Informações do evento do(a) {event.name} </h1> */}
-              <div
-                style={{
-                  display: 'flex',
-                  marginTop: '20px',
-                  border: '2px solid #ff9000',
-                  borderRadius: '10px',
-                  width: '400px',
-                  justifyContent: 'space-around',
-                  alignItems: 'center',
-                  padding: '10px',
-                  flex: 1,
-                }}
-              >
+              <BoxCard>
                 <BackgroundInput fileResponse={fileResponse}>
-                  <input
-                    style={inputCSS}
+                  <InputFile
                     name="file"
                     type="file"
-                    onChange={(e) => handleFile(e)}
+                    onChange={(e: any) => handleFile(e)}
                   />
                 </BackgroundInput>
 
                 {/* <button onClick={handleRemoveImage}> remove image</button> */}
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <ContentCard>
                   <span>{'event.description'}</span>
                   <span>{'event.email'}</span>
-                </div>
-              </div>
+                </ContentCard>
+              </BoxCard>
               <Button type={'button'} onClick={handleEditEvent}>
                 {' '}
                 Editar Evento{' '}
