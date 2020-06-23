@@ -16,6 +16,8 @@ import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer } from '../SignUp/styles';
 
+import { BackgroundInput } from './style';
+
 interface CreateEventFormData {
   name: string;
   description: string;
@@ -56,21 +58,6 @@ const Event: React.FC = () => {
       setUserId(user_id);
     }
   }
-
-  const backgroundCSS = {
-    backgroundImage: `url("${
-      fileResponse.url
-        ? fileResponse.url
-        : 'https://cdn5.vectorstock.com/i/thumb-large/76/79/your-logo-here-placeholder-symbol-vector-26077679.jpg'
-    } "`,
-    backgroundPosition: 'center',
-    height: '100px',
-    width: '100px',
-    borderRadius: '50%',
-    backgroundSize: 'cover',
-    cursor: 'pointer',
-    backgroundRepeat: 'no-repeat',
-  };
 
   const inputCSS = {
     zIndex: -1,
@@ -276,14 +263,14 @@ const Event: React.FC = () => {
                     marginBottom: '20px',
                   }}
                 >
-                  <div style={backgroundCSS}>
+                  <BackgroundInput fileResponse={fileResponse}>
                     <input
                       style={inputCSS}
                       name="file"
                       type="file"
                       onChange={(e) => handleFile(e)}
                     />
-                  </div>
+                  </BackgroundInput>
                 </div>
                 <Input name="name" type="text" placeholder="Nome" />
                 <Input name="description" type="text" placeholder="Descrição" />
@@ -321,14 +308,14 @@ const Event: React.FC = () => {
                   flex: 1,
                 }}
               >
-                <div style={backgroundCSS}>
+                <BackgroundInput fileResponse={fileResponse}>
                   <input
                     style={inputCSS}
                     name="file"
                     type="file"
                     onChange={(e) => handleFile(e)}
                   />
-                </div>
+                </BackgroundInput>
 
                 {/* <button onClick={handleRemoveImage}> remove image</button> */}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
