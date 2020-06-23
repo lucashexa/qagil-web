@@ -1,5 +1,4 @@
 import { apiQuser } from '../services/api';
-import { useUserBackend } from '../hooks/userBackend';
 
 const backendUserInformations = async (email: any) => {
   const config = {

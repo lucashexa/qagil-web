@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -23,8 +23,6 @@ import {
   BoxCard,
   ContentCard,
 } from './style';
-
-import input from '../../components/Input';
 
 interface CreateEventFormData {
   name: string;
@@ -156,10 +154,10 @@ const Event: React.FC = () => {
     }
   };
 
-  const handleRemoveImage = async () => {
-    await removeImg();
-    setFileResponse({} as fileResponse);
-  };
+  // const handleRemoveImage = async () => {
+  //   await removeImg();
+  //   setFileResponse({} as fileResponse);
+  // };
 
   const removeImg = async () => {
     const configImg = {

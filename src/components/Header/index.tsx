@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logoImg from '../../assets/logo.png';
-import { AiOutlinePoweroff, FcRemoveImage } from 'react-icons/all';
+import { AiOutlinePoweroff } from 'react-icons/all';
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
 import { apiQimage, apiQuser } from '../../services/api';
@@ -34,10 +34,6 @@ const Header: React.FC = () => {
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
-
-  useEffect(() => {
-    updateUser();
-  }, [fileResponse]);
 
   //updating informations of user
   if (userBackEnd) {
@@ -121,6 +117,10 @@ const Header: React.FC = () => {
       console.log('responseUser', responseUser);
     }
   };
+
+  useEffect(() => {
+    updateUser();
+  }, [fileResponse, updateUser]);
 
   return (
     <Container>

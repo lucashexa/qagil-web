@@ -16,8 +16,6 @@ import logoImg from '../../assets/logo.png';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
 
-import backendUserInformations from '../../utils/backendUserInformations';
-
 interface SingInFormData {
   email: string;
   password: string;
