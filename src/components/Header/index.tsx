@@ -11,6 +11,8 @@ import {
   ProfileInfos,
   SubContainer,
   UserName,
+  BackgroundInput,
+  InputFile,
 } from './styles';
 
 interface IuserBackEnd {
@@ -37,32 +39,6 @@ const Header: React.FC = () => {
     }
   }
 
-  const backgroundCSS = {
-    backgroundImage: `url("${
-      fileResponse.url
-        ? fileResponse.url
-        : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
-    } "`,
-    backgroundPosition: 'center',
-    height: '60px',
-    width: '60px',
-    borderRadius: '50%',
-    backgroundSize: 'cover',
-    cursor: 'pointer',
-    backgroundRepeat: 'no-repeat',
-  };
-
-  const inputCSS = {
-    opacity: 0,
-    height: '60px',
-    width: '60px',
-    borderRadius: '50%',
-    backgroundSize: 'cover',
-    cursor: 'pointer',
-    margin: 'auto',
-    marginTop: '10px',
-  };
-
   const handleFile = async (e: any) => {
     console.log('fileResponse', fileResponse);
     console.log('userBackEnd', userBackEnd);
@@ -88,14 +64,13 @@ const Header: React.FC = () => {
         <Logo src={logoImg} alt="QAgil" />
 
         <ProfileInfos>
-          <div style={backgroundCSS}>
-            <input
-              style={inputCSS}
+          <BackgroundInput fileResponse={fileResponse}>
+            <InputFile
               name="file"
               type="file"
               onChange={(e) => handleFile(e)}
             />
-          </div>
+          </BackgroundInput>
           <div>
             <span>Bem Vindo</span>
             <UserName>{user.name}</UserName>

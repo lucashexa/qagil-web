@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import avatar from '../../assets/avatar.png';
+interface fileResponseProps {
+  file_name: string;
+  url: string;
+}
+
+interface BackgroudInputProps {
+  fileResponse: fileResponseProps;
+}
 
 export const Container = styled.div`
   flex: 1;
@@ -48,4 +57,31 @@ export const SubContainer = styled.div`
 
 export const UserName = styled.span`
   color: #ff9000;
+`;
+
+export const BackgroundInput = styled.div<BackgroudInputProps>`
+  background-image: url(${avatar});
+  background-position: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-size: cover;
+  cursor: pointer;
+  background-repeat: no-repeat;
+
+  ${(props) =>
+    props.fileResponse.url &&
+    css`
+      background-image: url(${props.fileResponse.url});
+    `}
+`;
+
+export const InputFile = styled.input`
+  opacity: 0;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-size: cover;
+  cursor: pointer;
+  margin: auto;
 `;
