@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logoImg from '../../assets/logo.png';
-import { AiOutlinePoweroff } from 'react-icons/all';
+import { AiOutlinePoweroff, FcRemoveImage } from 'react-icons/all';
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
 import { apiQimage, apiQuser } from '../../services/api';
@@ -39,6 +39,7 @@ const Header: React.FC = () => {
     updateUser();
   }, [fileResponse]);
 
+  //updating informations of user
   if (userBackEnd) {
     const { user_id, image } = userBackEnd as IuserBackEnd;
 
@@ -59,6 +60,25 @@ const Header: React.FC = () => {
     singOut();
   };
 
+  //remove Image if already existis from Database
+  const removeImage = async (r: any) => {
+    const regexImg = /\/\/(.*?)\/(.*?)\/(.*?)(.*)/g.exec(r);
+
+    const name = regexImg && regexImg[regexImg.length - 1];
+
+    const config = {
+      headers: {
+        apikey: process.env.REACT_APP_API_KEY,
+        user_id: userId,
+        type: 'qagile-art-profile',
+      },
+    };
+
+    const response = await apiQimage.delete(`/v1/${name}`, config);
+
+    console.log('Imagem Deletada', response);
+  };
+
   const handleFile = async (e: any) => {
     const formData = new FormData();
 
@@ -73,6 +93,8 @@ const Header: React.FC = () => {
       },
     };
     const response = await apiQimage.post('/v1', formData, config);
+
+    await removeImage(fileResponse.url);
 
     await setFileResponse(response.data);
   };
