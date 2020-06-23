@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import avatar from '../../assets/avatar.png';
 interface fileResponseProps {
-  file_name: string;
-  url: string;
+  file_name?: string;
+  url?: string;
 }
 
 interface BackgroudInputProps {
@@ -25,6 +25,12 @@ export const Container = styled.div`
   svg {
     cursor: pointer;
     color: #999591;
+    width: 25px;
+    height: 25px;
+
+    &:hover {
+      color: #f99000;
+    }
   }
 `;
 

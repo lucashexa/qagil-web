@@ -5,6 +5,8 @@ import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
 import { apiQimage, apiQuser } from '../../services/api';
 
+import _ from 'lodash';
+
 import {
   Container,
   Logo,
@@ -17,11 +19,12 @@ import {
 
 interface IuserBackEnd {
   user_id: number;
+  image: string;
 }
 
 interface fileResponse {
-  file_name: string;
-  url: string;
+  file_name?: string;
+  url?: string;
 }
 
 const Header: React.FC = () => {
@@ -33,15 +36,21 @@ const Header: React.FC = () => {
   );
 
   if (userBackEnd) {
-    const { user_id } = userBackEnd as IuserBackEnd;
+    const { user_id, image } = userBackEnd as IuserBackEnd;
+
+    if (_.isEqual(fileResponse, {}) && image) {
+      setFileResponse({
+        url: image,
+      });
+      console.log('fileResponse', fileResponse);
+    }
+
     if (!userId) {
       setUserId(user_id);
     }
   }
 
   const handleFile = async (e: any) => {
-    console.log('fileResponse', fileResponse);
-    console.log('userBackEnd', userBackEnd);
     const formData = new FormData();
 
     formData.append('file', e.target.files[0]);
@@ -55,7 +64,26 @@ const Header: React.FC = () => {
       },
     };
     const response = await apiQimage.post('/v1', formData, config);
+
     await setFileResponse(response.data);
+
+    const dataUpdateImg = {
+      image: fileResponse.url,
+    };
+
+    const configUpdateImg = {
+      headers: {
+        apikey: process.env.REACT_APP_API_KEY,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const responseUser = await apiQuser.put(
+      `/v1/user/update/${userId}`,
+      dataUpdateImg,
+      configUpdateImg,
+    );
+    console.log(responseUser);
   };
 
   return (

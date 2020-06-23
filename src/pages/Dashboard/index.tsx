@@ -24,6 +24,8 @@ const Dashboard: React.FC = () => {
     });
   }
 
+  console.log(userBackEnd);
+
   return (
     <>
       <Header />
