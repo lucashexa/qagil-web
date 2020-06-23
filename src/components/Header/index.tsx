@@ -100,24 +100,26 @@ const Header: React.FC = () => {
   };
 
   const updateUser = async () => {
-    const dataUpdateImg = {
-      image: fileResponse.url,
-    };
+    if (userId) {
+      const dataUpdateImg = {
+        image: fileResponse.url,
+      };
 
-    const configUpdateImg = {
-      headers: {
-        apikey: process.env.REACT_APP_API_KEY,
-        'Content-Type': 'application/json',
-      },
-    };
+      const configUpdateImg = {
+        headers: {
+          apikey: process.env.REACT_APP_API_KEY,
+          'Content-Type': 'application/json',
+        },
+      };
 
-    const responseUser = await apiQuser.put(
-      `/v1/user/update/${userId}`,
-      dataUpdateImg,
-      configUpdateImg,
-    );
+      const responseUser = await apiQuser.put(
+        `/v1/user/update/${userId}`,
+        dataUpdateImg,
+        configUpdateImg,
+      );
 
-    console.log('responseUser', responseUser);
+      console.log('responseUser', responseUser);
+    }
   };
 
   return (
