@@ -16,7 +16,8 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  border-bottom: 1px solid #999591;
 
   img {
     width: 220px;
@@ -27,6 +28,7 @@ export const Container = styled.div`
     color: #999591;
     width: 25px;
     height: 25px;
+    margin-right: 10%;
 
     &:hover {
       color: #f99000;
