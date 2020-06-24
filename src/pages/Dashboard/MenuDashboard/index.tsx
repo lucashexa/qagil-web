@@ -4,13 +4,15 @@ import { Container, ButtonMenu } from './styles';
 
 interface IMenuDashboard {
   setContent: any;
+  content: string;
 }
 
 const MenuDashboard: React.FC<IMenuDashboard> = (props) => {
-  const { setContent } = props;
+  const { content, setContent } = props;
   return (
     <Container>
       <ButtonMenu
+        active={content === 'profile'}
         onClick={() => {
           setContent('profile');
         }}
@@ -18,6 +20,7 @@ const MenuDashboard: React.FC<IMenuDashboard> = (props) => {
         Meu Perfil
       </ButtonMenu>
       <ButtonMenu
+        active={content === 'event'}
         onClick={() => {
           setContent('event');
         }}
@@ -25,6 +28,7 @@ const MenuDashboard: React.FC<IMenuDashboard> = (props) => {
         Eventos
       </ButtonMenu>
       <ButtonMenu
+        active={content === 'history'}
         onClick={() => {
           setContent('history');
         }}
@@ -33,6 +37,7 @@ const MenuDashboard: React.FC<IMenuDashboard> = (props) => {
       </ButtonMenu>
 
       <ButtonMenu
+        active={content === 'more'}
         onClick={() => {
           setContent('more');
         }}

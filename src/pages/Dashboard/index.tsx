@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <MenuDashboard setContent={setContent} />
+      <MenuDashboard setContent={setContent} content={content} />
       <Header />
       <Content>{contents[content]}</Content>
       <Footer />

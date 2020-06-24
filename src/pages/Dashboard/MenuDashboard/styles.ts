@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Button from '../../../components/Button';
 import { shade } from 'polished';
+
+interface IButtonMenu {
+  active?: boolean;
+}
 
 export const Container = styled.div`
   position: fixed;
@@ -13,7 +17,7 @@ export const Container = styled.div`
   z-index: 1;
 `;
 
-export const ButtonMenu = styled(Button)`
+export const ButtonMenu = styled(Button)<IButtonMenu>`
   background: #28262e;
   border-radius: 0;
   margin: 0;
@@ -29,4 +33,18 @@ export const ButtonMenu = styled(Button)`
     margin-left: 10px;
     border: 1px solid;
   }
+
+  ${(props) =>
+    props.active &&
+    css`
+      background: #f99000;
+      color: #666360;
+
+      &:hover {
+        background: ${shade(0.2, '#f99000')};
+        color: ${shade(0.2, '#666360')};
+        margin-left: 10px;
+        border: 1px solid;
+      }
+    `}
 `;
