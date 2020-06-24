@@ -3,7 +3,7 @@ import Button from '../Button';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 220px;
   border-right: 1px solid #999591;

@@ -18,6 +18,8 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #999591;
+  position: fixed;
+  width: 100%;
 
   img {
     width: 220px;
