@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import MenuDashboard from './MenuDashboard';
 import Event from './Evento';
 import Profile from './Profile';
+import History from './History';
+import More from './More';
 
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
@@ -32,6 +34,8 @@ const Dashboard: React.FC = () => {
   const contents: { [key: string]: any } = {
     profile: <Profile />,
     event: <Event />,
+    history: <History />,
+    more: <More />,
   };
 
   return (

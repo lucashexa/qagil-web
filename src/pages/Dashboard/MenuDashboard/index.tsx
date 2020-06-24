@@ -24,8 +24,21 @@ const MenuDashboard: React.FC<IMenuDashboard> = (props) => {
       >
         Eventos
       </ButtonMenu>
-      <ButtonMenu>Historico</ButtonMenu>
-      <ButtonMenu>Mais</ButtonMenu>
+      <ButtonMenu
+        onClick={() => {
+          setContent('history');
+        }}
+      >
+        Historico
+      </ButtonMenu>
+
+      <ButtonMenu
+        onClick={() => {
+          setContent('more');
+        }}
+      >
+        Mais
+      </ButtonMenu>
     </Container>
   );
 };
