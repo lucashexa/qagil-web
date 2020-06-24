@@ -90,7 +90,9 @@ const Header: React.FC = () => {
     };
     const response = await apiQimage.post('/v1', formData, config);
 
-    await removeImage(fileResponse.url);
+    if (fileResponse.url) {
+      await removeImage(fileResponse.url);
+    }
 
     await setFileResponse(response.data);
   };
