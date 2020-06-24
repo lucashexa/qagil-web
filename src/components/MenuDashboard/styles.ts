@@ -10,6 +10,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 100px;
+  z-index: 1;
 `;
 
 export const ButtonMenu = styled(Button)`

@@ -3,18 +3,18 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import { apiQevent, apiQimage } from '../../services/api';
+import { apiQevent, apiQimage } from '../../../services/api';
 
-import { useToast } from '../../hooks/toast';
-import { useEvent, EventState } from '../../hooks/event';
-import { useUserBackend } from '../../hooks/userBackend';
+import { useToast } from '../../../hooks/toast';
+import { useEvent, EventState } from '../../../hooks/event';
+import { useUserBackend } from '../../../hooks/userBackend';
 
-import getValidarionErrors from '../../utils/getValidationErrors';
+import getValidarionErrors from '../../../utils/getValidationErrors';
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../../components/Input';
+import Button from '../../../components/Button';
 
-import { Container, Content, AnimationContainer } from '../SignUp/styles';
+import { Container, Content, AnimationContainer } from '../../SignUp/styles';
 
 import {
   BackgroundInput,

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import partyLogo from '../../assets/partyLogo.jpg';
+import partyLogo from '../../../assets/partyLogo.jpg';
 
 interface fileResponseProps {
   file_name: string;

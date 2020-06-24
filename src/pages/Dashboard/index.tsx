@@ -1,9 +1,10 @@
 import React from 'react';
-import CreateEvent from '../Evento';
-import Menu from '../Evento/Menu';
+
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import MenuDashboard from '../../components/MenuDashboard';
+
+import Event from './Evento';
 
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
@@ -33,9 +34,7 @@ const Dashboard: React.FC = () => {
       <MenuDashboard />
       <Header />
       <Content>
-        <CreateEvent />
-        {/* {true && <Menu />} */}
-        {event && <Menu />}
+        <Event />
       </Content>
       <Footer />
     </>
