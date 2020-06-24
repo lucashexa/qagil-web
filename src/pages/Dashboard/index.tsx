@@ -3,6 +3,7 @@ import CreateEvent from '../Evento';
 import Menu from '../Evento/Menu';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import MenuDashboard from '../../components/MenuDashboard';
 
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
@@ -29,6 +30,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+      <MenuDashboard />
       <Header />
       <Content>
         <CreateEvent />
