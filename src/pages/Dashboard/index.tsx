@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import MenuDashboard from '../../components/MenuDashboard';
 
+import MenuDashboard from './MenuDashboard';
 import Event from './Evento';
+import Profile from './Profile';
 
 import { useAuth } from '../../hooks/auth';
 import { useUserBackend } from '../../hooks/userBackend';
@@ -15,6 +16,7 @@ import backendUserInformations from '../../utils/backendUserInformations';
 import { Content } from './styles';
 
 const Dashboard: React.FC = () => {
+  const [content, setContent] = useState('profile');
   const { userBackEnd, setUserBackEnd } = useUserBackend();
   const { user } = useAuth();
   const { event } = useEvent();
@@ -27,15 +29,16 @@ const Dashboard: React.FC = () => {
     });
   }
 
-  console.log(userBackEnd);
+  const contents: { [key: string]: any } = {
+    profile: <Profile />,
+    event: <Event />,
+  };
 
   return (
     <>
-      <MenuDashboard />
+      <MenuDashboard setContent={setContent} />
       <Header />
-      <Content>
-        <Event />
-      </Content>
+      <Content>{contents[content]}</Content>
       <Footer />
     </>
   );
