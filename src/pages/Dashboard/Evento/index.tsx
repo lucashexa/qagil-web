@@ -84,6 +84,7 @@ const Event: React.FC = () => {
       },
     };
     const response = await apiQimage.post('/v1', formData, config);
+    console.log(response);
     await setFileResponse(response.data);
   };
 
@@ -123,6 +124,7 @@ const Event: React.FC = () => {
           dataQEvent,
           config,
         );
+        console.log(response);
         setEvent(response.data);
         addToast({
           type: 'success',
@@ -130,6 +132,7 @@ const Event: React.FC = () => {
         });
       } else {
         const response = await apiQevent.post('/', dataQEvent, config);
+        console.log(response);
         setEvent(response.data);
         addToast({
           type: 'success',
@@ -169,7 +172,11 @@ const Event: React.FC = () => {
       },
     };
 
-    await apiQimage.delete(`/v1/${fileResponse.file_name}`, configImg);
+    const response = await apiQimage.delete(
+      `/v1/${fileResponse.file_name}`,
+      configImg,
+    );
+    console.log(response);
 
     if (event) {
       const config = {
@@ -210,7 +217,7 @@ const Event: React.FC = () => {
 
       const response = await apiQevent.delete(`/${event?.id}`, config);
 
-      console.log(response.data);
+      console.log(response);
 
       setFileResponse({} as fileResponse);
 

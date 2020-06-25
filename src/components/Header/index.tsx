@@ -27,13 +27,20 @@ interface fileResponse {
   url?: string;
 }
 
-const Header: React.FC = () => {
+interface IHeader {
+  content: string;
+}
+
+const Header: React.FC<IHeader> = (props) => {
+  const { content } = props;
   const { singOut, user }: any = useAuth();
   const { userBackEnd, setUserBackEnd } = useUserBackend();
   const [userId, setUserId] = useState<number>();
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
+
+  console.log(content, 'header');
 
   //updating informations of user
   if (userBackEnd) {
@@ -71,6 +78,7 @@ const Header: React.FC = () => {
     };
 
     const response = await apiQimage.delete(`/v1/${name}`, config);
+    console.log(response);
 
     console.log('Imagem Deletada', response);
   };
@@ -89,6 +97,7 @@ const Header: React.FC = () => {
       },
     };
     const response = await apiQimage.post('/v1', formData, config);
+    console.log(response);
 
     if (fileResponse.url) {
       await removeImage(fileResponse.url);
@@ -116,20 +125,20 @@ const Header: React.FC = () => {
         configUpdateImg,
       );
 
-      console.log('responseUser', responseUser);
+      console.log(responseUser);
     }
   };
 
   useEffect(() => {
     updateUser();
-  }, [fileResponse, updateUser]);
+  }, [fileResponse]);
 
   return (
     <Container>
       <SubContainer>
         <Logo src={logoImg} alt="QAgil" />
 
-        <ProfileInfos>
+        <ProfileInfos hasContent={content === 'profile'}>
           <BackgroundInput fileResponse={fileResponse}>
             <InputFile
               name="file"
@@ -137,10 +146,12 @@ const Header: React.FC = () => {
               onChange={(e) => handleFile(e)}
             />
           </BackgroundInput>
-          <div>
-            <span>Bem Vindo</span>
-            <UserName>{user.name}</UserName>
-          </div>
+          {content !== 'profile' && (
+            <div>
+              <span>Bem Vindo</span>
+              <UserName>{user.name}</UserName>
+            </div>
+          )}
         </ProfileInfos>
       </SubContainer>
       <AiOutlinePoweroff onClick={handleSingOut} />

@@ -65,8 +65,13 @@ const SingUp: React.FC = () => {
         };
         console.log(dataQuser);
 
-        await apiQuser.post('/v1/user/create', dataQuser, config);
-        await apiLocal.post('/users', data);
+        const response = await apiQuser.post(
+          '/v1/user/create',
+          dataQuser,
+          config,
+        );
+        const response1 = await apiLocal.post('/users', data);
+        console.log(response, response1);
 
         history.push('/');
 

@@ -12,6 +12,7 @@ const backendUserInformations = async (email: any) => {
   };
 
   const userBack = await apiQuser.get('/v1/user/search', config);
+  console.log(userBack);
   return userBack;
 };
 

@@ -19,11 +19,13 @@ import { Content } from './styles';
 
 const Dashboard: React.FC = () => {
   const [content, setContent] = useState('profile');
+  const [requestProfile, setRequestProfile] = useState(false);
   const { userBackEnd, setUserBackEnd } = useUserBackend();
   const { user } = useAuth();
   const { event } = useEvent();
 
-  if (!userBackEnd) {
+  if (!userBackEnd && !requestProfile) {
+    setRequestProfile(true);
     const { email } = user as { email: string };
     backendUserInformations(email).then((response) => {
       console.log(response.data);
@@ -41,7 +43,7 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <MenuDashboard setContent={setContent} content={content} />
-      <Header />
+      <Header content={content} />
       <Content>{contents[content]}</Content>
       <Footer />
     </>
