@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import avatar from '../../assets/avatar.png';
 interface fileResponseProps {
   file_name?: string;
@@ -7,6 +7,10 @@ interface fileResponseProps {
 
 interface BackgroudInputProps {
   fileResponse: fileResponseProps;
+}
+
+interface IProfileInfos {
+  hasContent: Boolean;
 }
 
 export const Container = styled.div`
@@ -42,25 +46,6 @@ export const Logo = styled.img`
   width: 220px;
 `;
 
-export const ProfileInfos = styled.div`
-  display: flex;
-  width: 200px;
-  justify-content: space-around;
-  align-items: center;
-
-  div {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-  }
-
-  img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-  }
-`;
-
 export const SubContainer = styled.div`
   display: flex;
 `;
@@ -94,4 +79,73 @@ export const InputFile = styled.input`
   background-size: cover;
   cursor: pointer;
   margin: auto;
+`;
+
+const MoveImage = keyframes`
+  from {
+    left: 15%;
+    top: 15%;
+    transform: scale(1);
+
+  to {
+    left: 50%;
+    transform: scale(2);
+  }
+`;
+const MoveImageBack = keyframes`
+    from {
+    left: 50%;
+    top: 65%;
+    transform: scale(2);
+  }
+  to {
+    left: 15%;
+    top: 15%;
+    transform: scale(1);
+  }
+`;
+
+export const ProfileInfos = styled.div<IProfileInfos>`
+  position: absolute;
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  align-items: center;
+  left: 15%;
+  top: 15%;
+  animation-name: ${MoveImageBack};
+  animation-duration: 1s;
+
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  ${(props) =>
+    props.hasContent &&
+    css`
+      animation-name: ${MoveImage};
+      animation-duration: 1s;
+      position: absolute;
+      left: 50%;
+      top: 65%;
+      transform: scale(2);
+
+      /* div {
+        height: 120px;
+        width: 120px;
+      }
+
+      input {
+        height: 120px;
+        width: 120px;
+      } */
+    `}
 `;
