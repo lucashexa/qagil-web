@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
       setUserBackEnd(response.data);
 
       eventUserInformations(response.data.user_id).then((response) => {
-        console.log('events', response);
+        console.log(response);
         setEventsUser(response.data);
       });
     });
