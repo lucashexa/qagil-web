@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../../../../components/Button';
 import {
   Card,
   Image,
@@ -9,6 +8,7 @@ import {
   TitlePage,
   ContainerContentCard,
   Content,
+  ButtonCreate,
 } from './styles';
 import { Container, AnimationContainer } from '../../../SignUp/styles';
 
@@ -39,7 +39,7 @@ const EventList: React.FC = () => {
             </Card>
           ))}
         </Content>
-        <Button> Criar novo Evento </Button>
+        <ButtonCreate> Criar novo Evento </ButtonCreate>
       </AnimationContainer>
     </Container>
   );

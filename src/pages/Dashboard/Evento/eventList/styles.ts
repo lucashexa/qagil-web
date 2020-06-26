@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import eventImage from '../../../../assets/partyLogo.jpg';
 import { shade } from 'polished';
+import Button from '../../../../components/Button';
 
 interface Iimage {
   imageUrl: string;
@@ -69,4 +70,8 @@ export const SeeEvent = styled.p`
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const ButtonCreate = styled(Button)`
+  max-width: 290px;
 `;
