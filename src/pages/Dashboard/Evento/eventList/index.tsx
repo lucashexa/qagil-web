@@ -8,26 +8,37 @@ import {
   SeeEvent,
   TitlePage,
   ContainerContentCard,
+  Content,
 } from './styles';
 import { Container, AnimationContainer } from '../../../SignUp/styles';
 
+import { useEventsUser } from '../../../../hooks/eventsUser';
+
+interface Icard {
+  name: string;
+  description: string;
+  image_url: string;
+}
+
 const EventList: React.FC = () => {
+  const { EventsUser } = useEventsUser() as any;
+
   return (
     <Container>
       <AnimationContainer>
         <TitlePage>Meus Eventos</TitlePage>
-        <Card>
-          <Image />
-          <ContainerContentCard>
-            <Title>PLAYGROUND</Title>
-            <Description>
-              blablala blablala blablala blablala blablala blablala blablala
-              blablala blablala blablala blablala blablala blablala blablala
-              blablala blablala blablala blablala{' '}
-            </Description>
-            <SeeEvent>Ver Evento</SeeEvent>
-          </ContainerContentCard>
-        </Card>
+        <Content>
+          {EventsUser.map((card: Icard) => (
+            <Card>
+              <Image imageUrl={card.image_url} />
+              <ContainerContentCard>
+                <Title>{card.name}</Title>
+                <Description>{card.description}</Description>
+                <SeeEvent>Ver Evento</SeeEvent>
+              </ContainerContentCard>
+            </Card>
+          ))}
+        </Content>
         <Button> Criar novo Evento </Button>
       </AnimationContainer>
     </Container>

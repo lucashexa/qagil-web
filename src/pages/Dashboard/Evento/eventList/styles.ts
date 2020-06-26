@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import eventImage from '../../../../assets/partyLogo.jpg';
 import { shade } from 'polished';
+
+interface Iimage {
+  imageUrl: string;
+}
 
 export const Container = styled.div``;
 
@@ -12,12 +16,22 @@ export const Card = styled.div`
   flex-direction: column;
 `;
 
-export const Image = styled.div`
+export const Image = styled.div<Iimage>`
   background: url(${eventImage});
   height: 150px;
   background-size: cover;
   background-position: center;
   border-radius: 17px 17px 0 0;
+  background-position: center;
+  background-size: cover;
+
+  ${(props: any) =>
+    props.imageUrl &&
+    css`
+      background: url(${props.imageUrl});
+      background-position: center;
+      background-size: cover;
+    `}
 `;
 
 export const ContainerContentCard = styled.div`
@@ -50,4 +64,9 @@ export const SeeEvent = styled.p`
     color: ${shade(0.2, '#ff9000')};
     cursor: pointer;
   }
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
