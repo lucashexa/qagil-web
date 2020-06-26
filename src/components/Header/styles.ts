@@ -86,7 +86,7 @@ const MoveImage = keyframes`
     left: 15%;
     top: 15%;
     transform: scale(1);
-
+  }
   to {
     left: 50%;
     transform: scale(2);
@@ -98,7 +98,7 @@ const MoveImageBack = keyframes`
     top: 65%;
     transform: scale(2);
   }
-  to {
+    to {
     left: 15%;
     top: 15%;
     transform: scale(1);
@@ -137,6 +137,9 @@ export const ProfileInfos = styled.div<IProfileInfos>`
       left: 50%;
       top: 65%;
       transform: scale(2);
+      div {
+        border: 2px solid #f99000;
+      }
 
       /* div {
         height: 120px;
