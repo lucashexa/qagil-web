@@ -9,7 +9,7 @@ const Event: React.FC = () => {
   console.log('EventsUser', EventsUser);
   // const events
 
-  return <>{!EventsUser.length ? <CreateEvent /> : <EventList />}</>;
+  return <>{!EventsUser?.length ? <CreateEvent /> : <EventList />}</>;
 };
 
 export default Event;
