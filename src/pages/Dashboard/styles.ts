@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Content = styled.div`
-  display: flex;
-  justify-content: space-around;
+  margin-left: 220px;
+  margin-top: pos;
+  position: absolute;
+  margin-top: 100px;
 `;

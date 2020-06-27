@@ -9,8 +9,9 @@ import {
   ContainerContentCard,
   Content,
   ButtonCreate,
+  Container,
+  AnimationContainer,
 } from './styles';
-import { Container, AnimationContainer } from '../../../SignUp/styles';
 
 import { useEventsUser } from '../../../../hooks/eventsUser';
 

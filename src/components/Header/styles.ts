@@ -83,7 +83,7 @@ export const InputFile = styled.input`
 
 const MoveImage = keyframes`
   from {
-    left: 15%;
+    left: 250px;
     top: 15%;
     transform: scale(1);
   }
@@ -99,7 +99,7 @@ const MoveImageBack = keyframes`
     transform: scale(2);
   }
     to {
-    left: 15%;
+      left: 250px;
     top: 15%;
     transform: scale(1);
   }
@@ -111,7 +111,7 @@ export const ProfileInfos = styled.div<IProfileInfos>`
   width: 200px;
   justify-content: space-around;
   align-items: center;
-  left: 15%;
+  left: 250px;
   top: 15%;
   animation-name: ${MoveImageBack};
   animation-duration: 1s;
