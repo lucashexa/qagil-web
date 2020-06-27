@@ -20,8 +20,18 @@ interface Icard {
   image_url: string;
 }
 
-const EventList: React.FC = () => {
+interface iEvent {
+  addEvent: boolean;
+  setAddEvent(arg: boolean): void;
+}
+
+interface ICreateEventList {
+  addEvent: boolean;
+}
+
+const EventList: React.FC<iEvent> = (props) => {
   const { EventsUser } = useEventsUser() as any;
+  const { addEvent, setAddEvent } = props as iEvent;
 
   return (
     <Container>
@@ -39,7 +49,10 @@ const EventList: React.FC = () => {
             </Card>
           ))}
         </Content>
-        <ButtonCreate> Criar novo Evento </ButtonCreate>
+        <ButtonCreate onClick={() => setAddEvent(true)}>
+          {' '}
+          Criar novo Evento{' '}
+        </ButtonCreate>
       </AnimationContainer>
     </Container>
   );

@@ -43,7 +43,17 @@ interface fileResponse {
   url: string;
 }
 
-const CreateEvent: React.FC = () => {
+interface iEvent {
+  addEvent: boolean;
+  setAddEvent(arg: boolean): void;
+}
+
+interface ICreateEvent {
+  addEvent: boolean;
+}
+
+const CreateEvent: React.FC<iEvent> = (props) => {
+  const { addEvent, setAddEvent } = props as iEvent;
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const { event, setEvent } = useEvent();
@@ -95,6 +105,7 @@ const CreateEvent: React.FC = () => {
           type: 'success',
           title: 'Evento Criado com sucesso',
         });
+        setAddEvent(false);
         setFirstRegister(false);
       }
       setOnEditMode(false);
