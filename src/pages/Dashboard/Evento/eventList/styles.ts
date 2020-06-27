@@ -100,7 +100,6 @@ export const AnimationContainer = styled.div`
   justify-content: center;
   position: relative;
   top: 23%;
-  z-index: -1;
   height: 140vh;
 
   animation: ${appearFromRight} 1s;

@@ -39,7 +39,7 @@ const EventList: React.FC<iEvent> = (props) => {
       <AnimationContainer>
         <TitlePage>Meus Eventos</TitlePage>
         <Content>
-          {EventsUser.map((card: Icard) => (
+          {EventsUser?.map((card: Icard) => (
             <Card>
               <Image imageUrl={card.image_url} />
               <ContainerContentCard>

@@ -46,21 +46,15 @@ interface iEvent {
   setAddEvent(arg: boolean): void;
 }
 
-interface ICreateEvent {
-  addEvent: boolean;
-}
-
 const CreateEvent: React.FC<iEvent> = (props) => {
-  const { addEvent, setAddEvent } = props as iEvent;
+  const { setAddEvent } = props as iEvent;
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
-  const { event, setEvent } = useEvent();
-  const [firstRegister, setFirstRegister] = useState<boolean>(true);
-  const [onEditMode, setOnEditMode] = useState<boolean>(true);
-  const { EventsUser, setEventsUser } = useEventsUser();
+  const { setEventsUser } = useEventsUser();
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
+
   const { userBackEnd } = useUserBackend();
   const { user_id } = userBackEnd as { user_id: string };
 
@@ -83,23 +77,9 @@ const CreateEvent: React.FC<iEvent> = (props) => {
         email: data.email,
         image_url: fileResponse.url || '',
       };
-
-      if (onEditMode && !firstRegister) {
-        const response = await apiQevent.put(
-          `/${event?.id}`,
-          dataQEvent,
-          config,
-        );
-        console.log(response);
-        setEvent(response.data);
-        addToast({
-          type: 'success',
-          title: 'Evento editado com sucesso',
-        });
-      } else {
+      {
         const response = await apiQevent.post('/', dataQEvent, config);
         console.log(response);
-        setEvent(response.data);
         addToast({
           type: 'success',
           title: 'Evento Criado com sucesso',
@@ -110,9 +90,7 @@ const CreateEvent: React.FC<iEvent> = (props) => {
           setEventsUser(response.data);
           setAddEvent(false);
         });
-        setFirstRegister(false);
       }
-      setOnEditMode(false);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidarionErrors(err);
@@ -164,22 +142,6 @@ const CreateEvent: React.FC<iEvent> = (props) => {
       configImg,
     );
     console.log(response);
-
-    if (event) {
-      const config = {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          apikey: process.env.REACT_APP_API_KEY,
-          'Content-Type': 'application/json',
-          user_id,
-        },
-      };
-      const dataQEvent = {
-        image_url: '',
-      };
-      const response = await apiQevent.put(`/${event.id}`, dataQEvent, config);
-      console.log(response);
-    }
   };
 
   return (

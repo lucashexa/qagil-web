@@ -24,6 +24,7 @@ export const Container = styled.div`
   border-bottom: 1px solid #999591;
   position: fixed;
   width: 100%;
+  z-index: 1;
 
   img {
     width: 220px;
