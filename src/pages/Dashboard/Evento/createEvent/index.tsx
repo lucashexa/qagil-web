@@ -16,13 +16,11 @@ import Button from '../../../../components/Button';
 
 import { Container, Content, AnimationContainer } from '../../../SignUp/styles';
 
-import {
-  BackgroundInput,
-  InputFile,
-  ContainerEvent,
-  BoxCard,
-  ContentCard,
-} from './styles';
+import eventUserInformations from '../../../../utils/eventUserInformations';
+
+import { useEventsUser } from '../../../../hooks/eventsUser';
+
+import { BackgroundInput, InputFile, ContainerEvent } from './styles';
 
 interface CreateEventFormData {
   name: string;
@@ -59,6 +57,7 @@ const CreateEvent: React.FC<iEvent> = (props) => {
   const { event, setEvent } = useEvent();
   const [firstRegister, setFirstRegister] = useState<boolean>(true);
   const [onEditMode, setOnEditMode] = useState<boolean>(true);
+  const { EventsUser, setEventsUser } = useEventsUser();
   const [fileResponse, setFileResponse] = useState<fileResponse>(
     {} as fileResponse,
   );
@@ -105,7 +104,12 @@ const CreateEvent: React.FC<iEvent> = (props) => {
           type: 'success',
           title: 'Evento Criado com sucesso',
         });
-        setAddEvent(false);
+
+        //Refactor
+        eventUserInformations(user_id).then((response) => {
+          setEventsUser(response.data);
+          setAddEvent(false);
+        });
         setFirstRegister(false);
       }
       setOnEditMode(false);
@@ -113,7 +117,6 @@ const CreateEvent: React.FC<iEvent> = (props) => {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidarionErrors(err);
         formRef.current?.setErrors(errors);
-
         return;
       }
 
